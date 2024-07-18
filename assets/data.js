@@ -10,7 +10,7 @@ export const logins = [
         path : require('./icons/facebook.png')
     },
     {
-        name : "email",
+        name : "signUp",
         title : "Sign up with Email",
         path : require('./icons/email.png')
     }

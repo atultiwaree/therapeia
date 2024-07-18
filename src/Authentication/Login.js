@@ -6,6 +6,16 @@ import {
   responsiveFontSize,
 } from 'react-native-responsive-dimensions';
 import {logins} from '../../assets/data';
+import { navigate } from '../../Navigation/RootNavigation';
+
+
+const handleEachPress = (index) => {
+  
+    if(index === 2) {
+      navigate("Signup")
+    }
+}
+
 
 const EachBoxComponent = ({item, index}) => {
   return (
@@ -14,7 +24,11 @@ const EachBoxComponent = ({item, index}) => {
         styles.eachBox,
         {flexDirection: 'row', gap: responsiveWidth(4)},
         commonStyle.everyCenter,
-      ]}>
+      ]}
+
+      onPress={handleEachPress.bind(null, index)}
+      
+      >
       <View style={styles.eachBoxImage}>
         <Image
           source={item.path}
