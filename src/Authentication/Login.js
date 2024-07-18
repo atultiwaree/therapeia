@@ -1,6 +1,6 @@
 import {FlatList, Image, Pressable, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import commonStyle, {commonColor} from '../../Styles/AppStyles';
+import commonStyle, {commonColor, commonSize} from '../../Styles/AppStyles';
 import {
   responsiveWidth,
   responsiveFontSize,
@@ -99,9 +99,9 @@ const styles = StyleSheet.create({
     marginVertical: responsiveWidth(16),
   },
   eachBox: {
-    borderWidth: responsiveWidth(0.8),
+    borderWidth: commonSize.BORDER_WIDTH,
     borderColor: commonColor.LIGHT_BORDER,
-    borderRadius: responsiveWidth(2),
+    borderRadius: commonSize.BORDER_RADIUS,
     flexDirection: 'row',
     width: responsiveWidth(74),
     alignSelf: 'center',

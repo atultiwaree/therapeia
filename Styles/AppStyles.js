@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {responsiveWidth, responsiveFontSize} from 'react-native-responsive-dimensions'
 
 export const commonColor = {
@@ -6,6 +6,17 @@ export const commonColor = {
     "BLACK" : "#282828",
     "LIGHT_BORDER" : "#AFABAB"
 }
+
+export const commonSize = {
+  "BORDER_WIDTH" : responsiveWidth(0.8),
+  "BORDER_RADIUS" : responsiveWidth(2)
+}
+
+
+export const MarginVertical = ({size}) => {
+    return <View style = {{marginTop : responsiveWidth(size)}}/>
+}
+
 
 const commonStyle = StyleSheet.create({
   container: {
@@ -21,7 +32,7 @@ const commonStyle = StyleSheet.create({
     color : commonColor.BLACK,
     fontSize : responsiveFontSize(2.6),
     textAlign : 'center',
-    fontFamily : 'Poppins-Medium'
+    fontFamily : 'Poppins-SemiBold'
   },
 
   blueText: {
@@ -30,6 +41,16 @@ const commonStyle = StyleSheet.create({
   redText: {
     color: 'red',
   },
+  textInput : {
+    borderWidth: commonSize.BORDER_WIDTH,
+    borderColor: commonColor.LIGHT_BORDER,
+    borderRadius: commonSize.BORDER_RADIUS,
+    fontFamily : 'Poppins-Medium',
+    paddingHorizontal : responsiveWidth(4),
+    width: responsiveWidth(80),
+    alignSelf : 'center',
+    marginVertical : responsiveWidth(2)
+  }
 });
 
 export default commonStyle;
