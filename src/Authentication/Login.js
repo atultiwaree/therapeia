@@ -1,48 +1,108 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import commonStyle from '../../Styles/AppStyles'
-import {responsiveWidth, responsiveFontSize} from 'react-native-responsive-dimensions'
+import {FlatList, Image, Pressable, StyleSheet, Text, View} from 'react-native';
+import React from 'react';
+import commonStyle, {commonColor} from '../../Styles/AppStyles';
+import {
+  responsiveWidth,
+  responsiveFontSize,
+} from 'react-native-responsive-dimensions';
+import {logins} from '../../assets/data';
 
+const EachBoxComponent = ({item, index}) => {
+  return (
+    <Pressable
+      style={[
+        styles.eachBox,
+        {flexDirection: 'row', gap: responsiveWidth(4)},
+        commonStyle.everyCenter,
+      ]}>
+      <View style={styles.eachBoxImage}>
+        <Image
+          source={item.path}
+          resizeMethod="resize"
+          resizeMode="contain"
+          style={{width: '100%'}}
+        />
+      </View>
 
+      <Text style={styles.eachBoxText}>{item.title}</Text>
+    </Pressable>
+  );
+};
 
 const Login = () => {
   return (
-    <View style = {[commonStyle.container, {alignItems : 'center', justifyContent : 'center'}]}>
-      
-      <View style = {styles.box}>
-      <Text style = {commonStyle.boldTitle}>Welcome to</Text>
+    <View
+      style={[
+        commonStyle.container,
+        {alignItems: 'center', justifyContent: 'center'},
+      ]}>
+      <View style={styles.box}>
+        <Text style={commonStyle.boldTitle}>Welcome to</Text>
 
-      <View style = {styles.imageContainer}>
-      <Image source={require('../../assets/images/logo.png')} style = {styles.image} resizeMethod='resize' resizeMode='contain'/>
+        <View style={styles.imageContainer}>
+          <Image
+            source={require('../../assets/images/logo.png')}
+            style={styles.image}
+            resizeMethod="resize"
+            resizeMode="contain"
+          />
+        </View>
+
+        <Text style={[commonStyle.boldTitle, {fontFamily: 'Poppins-Regular'}]}>
+          Step Closer to Self-Care
+        </Text>
+
+        <FlatList
+          data={logins}
+          renderItem={props => <EachBoxComponent {...props} />}
+          ItemSeparatorComponent={() => (
+            <View style={{marginVertical: responsiveWidth(2)}} />
+          )}
+          style={{marginTop: responsiveWidth(16)}}
+        />
       </View>
-
-
-
-      </View>
-
-      
     </View>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
 
 const styles = StyleSheet.create({
-  box : {
-
-    width : "100%",
-
+  box: {
+    width: '100%',
   },
-  image : {
+  image: {
     // height : responsiveWidth(20),
-    width : "100%"
+    width: '100%',
   },
-  imageContainer : {
-    height : responsiveWidth(18),
-    width : responsiveWidth(60),
+  imageContainer: {
+    height: responsiveWidth(16),
+    width: responsiveWidth(60),
     // borderWidth : 1,
-    resizeMode : 'contain',
+    resizeMode: 'contain',
     ...commonStyle.everyCenter,
-    alignSelf : 'center'
-  }
-})
+    alignSelf: 'center',
+    marginVertical: responsiveWidth(16),
+  },
+  eachBox: {
+    borderWidth: responsiveWidth(0.8),
+    borderColor: commonColor.LIGHT_BORDER,
+    borderRadius: responsiveWidth(2),
+    flexDirection: 'row',
+    width: responsiveWidth(74),
+    alignSelf: 'center',
+    paddingVertical: responsiveWidth(4),
+  },
+  eachBoxImage: {
+    width: responsiveWidth(8),
+    height: responsiveWidth(8),
+    ...commonStyle.everyCenter,
+  },
+  eachBoxText: {
+    fontFamily: 'Poppins-Medium',
+    fontSize: responsiveFontSize(2.3),
+    color: commonColor.BLACK,
+    // borderWidth : 1,
+    width: responsiveWidth(54),
+  },
+});

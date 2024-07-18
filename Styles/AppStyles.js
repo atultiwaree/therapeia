@@ -3,7 +3,8 @@ import {responsiveWidth, responsiveFontSize} from 'react-native-responsive-dimen
 
 export const commonColor = {
     "MAIN" : "#F1EFE7",
-    "BLACK" : "#282828"
+    "BLACK" : "#282828",
+    "LIGHT_BORDER" : "#AFABAB"
 }
 
 const commonStyle = StyleSheet.create({
@@ -17,10 +18,10 @@ const commonStyle = StyleSheet.create({
     alignItems: 'center',
   },
   boldTitle : {
-    color : "#282828",
-    fontWeight : "600",
-    fontSize : responsiveFontSize(2.3),
-    textAlign : 'center'
+    color : commonColor.BLACK,
+    fontSize : responsiveFontSize(2.6),
+    textAlign : 'center',
+    fontFamily : 'Poppins-Medium'
   },
 
   blueText: {
