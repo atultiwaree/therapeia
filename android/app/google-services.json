@@ -12,7 +12,20 @@
           "package_name": "com.therapeia"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "160256176538-fvlhsrsptr0cl22mhfeugcq0m5pvbcgl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.therapeia",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "160256176538-vihn9ueuvcao8mavc4msogfm7ham31sg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDg1OsPWwwYrBWWCNaYC4NaFD8WLWPbuP4"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "160256176538-vihn9ueuvcao8mavc4msogfm7ham31sg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
