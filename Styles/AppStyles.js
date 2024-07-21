@@ -8,13 +8,13 @@ export const commonColor = {
   MAIN: '#F1EFE7',
   BLACK: '#282828',
   LIGHT_BORDER: '#AFABAB',
-  BACKGROUND_GREY : "#d0cece"
+  BACKGROUND_GREY: '#d0cece',
 };
 
 export const commonSize = {
   BORDER_WIDTH: responsiveWidth(0.8),
   BORDER_RADIUS: responsiveWidth(2),
-  BTN_FONT_SIZE:  responsiveFontSize(2.3)
+  BTN_FONT_SIZE: responsiveFontSize(2.3),
 };
 
 export const MarginVertical = ({size}) => {
@@ -27,7 +27,7 @@ export const MarginVertical = ({size}) => {
 //       <></>
 //     </View>
 //   )
-// } 
+// }
 
 const commonStyle = StyleSheet.create({
   container: {
@@ -60,6 +60,16 @@ const commonStyle = StyleSheet.create({
     width: responsiveWidth(80),
     alignSelf: 'center',
     marginVertical: responsiveWidth(2),
+  },
+  button: {
+    padding: responsiveWidth(3),
+    backgroundColor: '#d0cece',
+    borderRadius: commonSize.BORDER_RADIUS,
+    marginTop: responsiveWidth(8),
+    textAlign: 'center',
+    fontFamily: 'Poppins-SemiBold',
+    fontSize: commonSize.BTN_FONT_SIZE,
+    color: commonColor.BLACK,
   },
 });
 

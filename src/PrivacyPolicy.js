@@ -38,9 +38,11 @@ const PrivacyPolicy = () => {
           is required by law.
         </Text>
 
-        <Text onPress={handleSetPrivacyPolicy} style={styles.understoodButton}>
+        <Text onPress={handleSetPrivacyPolicy} style={commonStyle.button}>
           Understood
         </Text>
+
+
       </View>
     </View>
   );
@@ -57,14 +59,5 @@ const styles = StyleSheet.create({
     width: '100%',
   },
 
-  understoodButton: {
-    padding: responsiveWidth(3),
-    backgroundColor: '#d0cece',
-    borderRadius: commonSize.BORDER_RADIUS,
-    marginTop: responsiveWidth(8),
-    textAlign: 'center',
-    fontFamily: 'Poppins-SemiBold',
-    fontSize: commonSize.BTN_FONT_SIZE,
-    color: commonColor.BLACK,
-  },
+
 });
