@@ -8,6 +8,7 @@ export const commonColor = {
   MAIN: '#F1EFE7',
   BLACK: '#282828',
   LIGHT_BORDER: '#AFABAB',
+  BACKGROUND_GREY : "#d0cece"
 };
 
 export const commonSize = {

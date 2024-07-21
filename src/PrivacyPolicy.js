@@ -5,6 +5,7 @@ import {
   responsiveFontSize,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
+import { navigate } from '../Navigation/RootNavigation';
 
 const PrivacyPolicy = () => {
   return (
@@ -29,7 +30,7 @@ const PrivacyPolicy = () => {
           is required by law.
         </Text>
 
-        <Text style={styles.understoodButton}>Understood</Text>
+        <Text onPress={() => navigate("categoryScreen")} style={styles.understoodButton}>Understood</Text>
       </View>
     </View>
   );

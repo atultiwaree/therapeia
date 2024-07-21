@@ -7,6 +7,7 @@ import Back from './Back';
 import {commonColor} from '../Styles/AppStyles';
 import SignIn from '../src/Authentication/Signin';
 import PrivacyPolicy from '../src/PrivacyPolicy';
+import CategoryScreen from '../src/CategoryScreen';
 const Stack = createNativeStackNavigator();
 
 const StackNavigation = () => {
@@ -48,6 +49,15 @@ const StackNavigation = () => {
       <Stack.Screen
         name="privacyPolicy"
         component={PrivacyPolicy}
+        options={{
+          title: '',
+          headerShadowVisible: false,
+        }}
+      />
+
+      <Stack.Screen
+        name="categoryScreen"
+        component={CategoryScreen}
         options={{
           title: '',
           headerShadowVisible: false,
