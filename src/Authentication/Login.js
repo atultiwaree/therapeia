@@ -16,7 +16,6 @@ const handleEachPress = (index) => {
     }
 }
 
-
 const EachBoxComponent = ({item, index}) => {
   return (
     <Pressable
@@ -48,7 +47,7 @@ const Login = () => {
     <View
       style={[
         commonStyle.container,
-        {alignItems: 'center', justifyContent: 'center'},
+        commonStyle.everyCenter,
       ]}>
       <View style={styles.box}>
         <Text style={commonStyle.boldTitle}>Welcome to</Text>
