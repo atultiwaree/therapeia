@@ -5,9 +5,17 @@ import {
   responsiveFontSize,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import { navigate } from '../Navigation/RootNavigation';
+import {navigate} from '../Navigation/RootNavigation';
+import {useDispatch} from 'react-redux';
+import {setPrivacyPolicy} from '../redux/reducers/Auth';
 
 const PrivacyPolicy = () => {
+  const dispatch = useDispatch();
+
+  const handleSetPrivacyPolicy = () => {
+    dispatch(setPrivacyPolicy({status: true}));
+  };
+
   return (
     <View style={[commonStyle.container, commonStyle.everyCenter]}>
       <View style={styles.box}>
@@ -30,7 +38,9 @@ const PrivacyPolicy = () => {
           is required by law.
         </Text>
 
-        <Text onPress={() => navigate("categoryScreen")} style={styles.understoodButton}>Understood</Text>
+        <Text onPress={handleSetPrivacyPolicy} style={styles.understoodButton}>
+          Understood
+        </Text>
       </View>
     </View>
   );

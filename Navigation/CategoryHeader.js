@@ -2,19 +2,19 @@ import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {responsiveWidth} from 'react-native-responsive-dimensions';
 import {useNavigation} from '@react-navigation/native';
+import {navigate} from './RootNavigation';
 
-const Back = () => {
+const CategoryBack = () => {
   const navigation = useNavigation();
 
   return (
-    <TouchableOpacity onPress={() => navigation.goBack()}>
+    <TouchableOpacity onPress={() => navigate('profile')}>
       <Image
         style={{height: responsiveWidth(10), width: responsiveWidth(10)}}
-        source={require('../assets/icons/back-button.png')}
+        source={require('../assets/icons/setting.png')}
       />
     </TouchableOpacity>
   );
-  
 };
 
-export default Back;
+export default CategoryBack;

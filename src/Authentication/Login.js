@@ -1,22 +1,35 @@
 import {FlatList, Image, Pressable, StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, {useCallback, useEffect} from 'react';
 import commonStyle, {commonColor, commonSize} from '../../Styles/AppStyles';
 import {
   responsiveWidth,
   responsiveFontSize,
 } from 'react-native-responsive-dimensions';
 import {logins} from '../../assets/data';
-import { navigate } from '../../Navigation/RootNavigation';
-
-
-const handleEachPress = (index) => {
-  
-    if(index === 2) {
-      navigate("Signup")
-    }
-}
+import {navigate} from '../../Navigation/RootNavigation';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import authSystem from '../../OAuth';
+import {useDispatch, useSelector} from 'react-redux';
+import {addUser} from '../../redux/reducers/Auth';
+import {useNavigation} from '@react-navigation/native';
 
 const EachBoxComponent = ({item, index}) => {
+  const dispatch = useDispatch();
+
+  const handleEachPress = useCallback(async index => {
+    if (index === 2) {
+      navigate('Signup');
+    }
+
+    if (index === 0) {
+      console.log('Google signin');
+
+      let userInformation = await authSystem.googleSignIn();
+
+      dispatch(addUser(userInformation));
+    }
+  }, []);
+
   return (
     <Pressable
       style={[
@@ -24,10 +37,7 @@ const EachBoxComponent = ({item, index}) => {
         {flexDirection: 'row', gap: responsiveWidth(4)},
         commonStyle.everyCenter,
       ]}
-
-      onPress={handleEachPress.bind(null, index)}
-      
-      >
+      onPress={handleEachPress.bind(null, index)}>
       <View style={styles.eachBoxImage}>
         <Image
           source={item.path}
@@ -44,11 +54,7 @@ const EachBoxComponent = ({item, index}) => {
 
 const Login = () => {
   return (
-    <View
-      style={[
-        commonStyle.container,
-        commonStyle.everyCenter,
-      ]}>
+    <View style={[commonStyle.container, commonStyle.everyCenter]}>
       <View style={styles.box}>
         <Text style={commonStyle.boldTitle}>Welcome to</Text>
 
