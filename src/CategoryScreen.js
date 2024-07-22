@@ -14,20 +14,33 @@ import {
   responsiveFontSize,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
+import { navigate } from '../Navigation/RootNavigation';
 
 const CategoryScreen = () => {
+  
+
+  const handleEachCategory = (index) => {
+    
+      if(index === 0) {
+        navigate("counselling")
+      }
+    
+  }
+
   const EachCategoryBox = ({item}) => {
-    console.log(item, '::::');
 
     return (
-      <TouchableOpacity style={styles.box}>
+      <TouchableOpacity  style={styles.box}
+      
+      onPress={() => handleEachCategory(item.id)}
+      
+      >
         <Image
           source={item.path}
           resizeMethod="resize"
           resizeMode="contain"
           style={{
             width: '70%',
-
             height: responsiveWidth(20),
           }}
         />
@@ -45,6 +58,8 @@ const CategoryScreen = () => {
         </Text>
       </TouchableOpacity>
     );
+
+
   };
 
   return (
@@ -80,10 +95,3 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
 });
-
-/**
- * A there way you up on the best
- * to up can't the
- *
- *
- */

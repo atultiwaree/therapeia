@@ -11,6 +11,8 @@ import CategoryScreen from '../src/CategoryScreen';
 import {useSelector} from 'react-redux';
 import CategoryBack from './CategoryHeader';
 import Profile from '../src/Profile';
+import { counsellingCategory } from '../assets/data';
+import Counselling from '../src/SubCategories/Counselling';
 const Stack = createNativeStackNavigator();
 
 const StackNavigation = () => {
@@ -77,6 +79,17 @@ const StackNavigation = () => {
                   headerShadowVisible: false,
                 }}
               />
+
+              <Stack.Screen
+                name="counselling"
+                component={Counselling}
+                options={{
+                  title: '',
+                  headerShadowVisible: false,
+                }}
+              />
+
+
             </>
           ) : (
             <>
@@ -86,6 +99,7 @@ const StackNavigation = () => {
                 options={{
                   title: '',
                   headerShadowVisible: false,
+                  headerShown: false,
                 }}
               />
             </>

@@ -58,3 +58,54 @@ export const counsellingCategory = [
     path: require('../assets/icons/therapist.png'),
   },
 ];
+
+export const counsellingData = [
+  {
+    id: 0,
+    title: 'Mood',
+  },
+  {
+    id: 1,
+    title: 'Worry',
+  },
+  {
+    id: 2,
+    title: 'Anxiety',
+  },
+  {
+    id: 3,
+    title: 'Sleep',
+  },
+  {
+    id: 4,
+    title: 'Relation',
+  },
+  {
+    id: 5,
+    title: 'Loss',
+  },
+  {
+    id: 6,
+    title: 'Stress',
+  },
+  {
+    id: 7,
+    title: 'Loneliness',
+  },
+  {
+    id: 8,
+    title: 'Health',
+  },
+  {
+    id: 9,
+    title: 'Trauma',
+  },
+  {
+    id: 10,
+    title: 'Stress',
+  },
+  {
+    id: 11,
+    title: 'LGBTQ+',
+  },
+];
