@@ -20,7 +20,7 @@ const EachBoxComponent = ({item, index}) => {
     if (index === 2) {
       navigate('Signup');
     }
-
+    
     if (index === 0) {
       console.log('Google signin');
 

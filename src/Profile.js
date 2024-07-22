@@ -24,7 +24,7 @@ const Profile = () => {
 
         <MarginVertical size={8} />
 
-        <Text style={[commonStyle.boldTitle]}>{`👋 Hi! ${userInfo.name}`}</Text>
+        <Text style={[commonStyle.boldTitle]}>{`👋 Hi! ${userInfo.name ? userInfo.name : userInfo.email}`}</Text>
       </View>
 
       <Text onPress={() => authSystem.signOut()} style={commonStyle.button}>
