@@ -1,12 +1,12 @@
 export const logins = [
   {
     name: 'google',
-    title: 'Sign up with Google',
+    title: 'Sign in with Google',
     path: require('./icons/google.png'),
   },
   {
     name: 'facebook',
-    title: 'Sign up with Facebook',
+    title: 'Sign in with Facebook',
     path: require('./icons/facebook.png'),
   },
   {
