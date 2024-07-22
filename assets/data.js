@@ -11,7 +11,7 @@ export const logins = [
   },
   {
     name: 'signUp',
-    title: 'Sign up with Email',
+    title: 'Sign in with Email',
     path: require('./icons/email.png'),
   },
 ];

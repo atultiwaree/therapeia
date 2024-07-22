@@ -1,6 +1,10 @@
 import {FlatList, Image, Pressable, StyleSheet, Text, View} from 'react-native';
 import React, {useCallback, useEffect} from 'react';
-import commonStyle, {commonColor, commonSize} from '../../Styles/AppStyles';
+import commonStyle, {
+  MarginVertical,
+  commonColor,
+  commonSize,
+} from '../../Styles/AppStyles';
 import {
   responsiveWidth,
   responsiveFontSize,
@@ -18,9 +22,9 @@ const EachBoxComponent = ({item, index}) => {
 
   const handleEachPress = useCallback(async index => {
     if (index === 2) {
-      navigate('Signup');
+      navigate('Signin');
     }
-    
+
     if (index === 0) {
       console.log('Google signin');
 
@@ -79,6 +83,19 @@ const Login = () => {
           )}
           style={{marginTop: responsiveWidth(16)}}
         />
+
+        <MarginVertical size={8} />
+
+        <Text
+          style={[
+            commonStyle.boldTitle,
+            {fontFamily: 'Poppins-Medium', marginTop: responsiveWidth(2)},
+          ]}>
+          Don't have account?{' '}
+          <Text onPress={() => navigate('Signup')} style={{color: '#548235'}}>
+            Sign Up
+          </Text>
+        </Text>
       </View>
     </View>
   );
