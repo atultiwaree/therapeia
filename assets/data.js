@@ -28,32 +28,32 @@ export const counsellingCategory = [
     path: require('../assets/icons/plan.png'),
   },
   {
-    name: 'Educate',
+    title: 'Educate',
     id: 2,
     path: require('../assets/icons/student.png'),
   },
   {
-    name: 'Activity',
+    title: 'Activity',
     id: 3,
     path: require('../assets/icons/activity.png'),
   },
   {
-    name: 'Breathe',
+    title: 'Breathe',
     id: 4,
     path: require('../assets/icons/breath.png'),
   },
   {
-    name: 'Assessment',
+    title: 'Assessment',
     id: 5,
     path: require('../assets/icons/assessment.png'),
   },
   {
-    name: 'Community',
+    title: 'Community',
     id: 6,
     path: require('../assets/icons/community.png'),
   },
   {
-    name: 'Therapist',
+    title: 'Therapist',
     id: 7,
     path: require('../assets/icons/therapist.png'),
   },

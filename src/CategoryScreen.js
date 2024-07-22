@@ -1,5 +1,4 @@
 import {
-  Alert,
   FlatList,
   Image,
   Pressable,
@@ -11,19 +10,40 @@ import {
 import React from 'react';
 import commonStyle, {commonColor, commonSize} from '../Styles/AppStyles';
 import {counsellingCategory} from '../assets/data';
-import {responsiveWidth} from 'react-native-responsive-dimensions';
+import {
+  responsiveFontSize,
+  responsiveWidth,
+} from 'react-native-responsive-dimensions';
 
 const CategoryScreen = () => {
-  const EachCategoryBox = ({item, index}) => {
+  const EachCategoryBox = ({item}) => {
+    console.log(item, '::::');
+
     return (
-      <Pressable style={styles.box} >
+      <TouchableOpacity style={styles.box}>
         <Image
           source={item.path}
           resizeMethod="resize"
           resizeMode="contain"
-          style={{width: '80%'}}
+          style={{
+            width: '70%',
+
+            height: responsiveWidth(20),
+          }}
         />
-      </Pressable>
+
+        <Text
+          style={[
+            commonStyle.boldTitle,
+            {
+              fontFamily: 'Poppins-SemiBold',
+              fontSize: responsiveFontSize(2.0),
+              marginTop: responsiveWidth(2),
+            },
+          ]}>
+          {item.title}
+        </Text>
+      </TouchableOpacity>
     );
   };
 
@@ -31,7 +51,7 @@ const CategoryScreen = () => {
     <View style={commonStyle.container}>
       <FlatList
         data={counsellingCategory}
-        renderItem={props => <EachCategoryBox {...props} />}
+        renderItem={({item, index}) => <EachCategoryBox item={item} />}
         numColumns={2}
         columnWrapperStyle={{
           justifyContent: 'space-around',
@@ -39,6 +59,7 @@ const CategoryScreen = () => {
         style={{
           marginTop: responsiveWidth(10),
         }}
+        keyExtractor={item => item.id}
       />
     </View>
   );
@@ -51,11 +72,18 @@ const styles = StyleSheet.create({
     height: responsiveWidth(33),
     width: responsiveWidth(33),
     padding: responsiveWidth(2),
+    ...commonStyle.everyCenter,
     backgroundColor: commonColor.BACKGROUND_GREY,
     margin: responsiveWidth(2),
     marginVertical: responsiveWidth(6),
     borderRadius: commonSize.BORDER_RADIUS,
-    ...commonStyle.everyCenter,
-    borderWidth : 1
+    borderWidth: 1,
   },
 });
+
+/**
+ * A there way you up on the best
+ * to up can't the
+ *
+ *
+ */
