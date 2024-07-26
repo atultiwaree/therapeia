@@ -6,12 +6,11 @@ import {
   responsiveFontSize,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import { counsellingData, treatmentType } from '../../../assets/data';
-import { navigate } from '../../../Navigation/RootNavigation';
+import { counsellingData, intervationData, treatmentType } from '../../../assets/data';
 
 
 
-const WhatWorks = () => {
+const Intervation = () => {
   const EachCategoryBox = ({item}) => {
 
     return (
@@ -21,31 +20,18 @@ const WhatWorks = () => {
           {
             width: responsiveWidth(85),
             backgroundColor: commonColor.BLACK,
-            flexDirection : 'row',
-            justifyContent : 'space-around',
-            alignItems : 'center'
           },
         ]}
-       onPress={() => navigate("intervation")}
      >
-
-
-
-        <View style = {styles.deeperImages}>
-        <Image  source={item.path} resizeMethod='resize' resizeMode='contain' style = {{width : "100%", height : "100%"}}/>
-        </View>
-
-
         <Text
           style={[
             commonStyle.boldTitle,
             {
               fontFamily: 'Poppins-SemiBold',
-              fontSize: responsiveFontSize(2.2),
+              fontSize: responsiveFontSize(2),
               marginTop: responsiveWidth(2),
               color: '#fff',
-              width : responsiveWidth(60),
-              textAlign : 'left'
+              width : responsiveWidth(80),
             },
           ]}>
           {item.title}
@@ -61,11 +47,11 @@ const WhatWorks = () => {
           commonStyle.boldTitle,
           {fontFamily: 'Poppins-Medium', marginTop: responsiveWidth(2)},
         ]}>
-        Choose what works for you best
+        Interventions
       </Text>
 
       <FlatList
-        data={treatmentType}
+        data={intervationData}
         renderItem={({item, index}) => <EachCategoryBox item={item} />}
         style={{
           marginTop: responsiveWidth(10),          
@@ -77,7 +63,7 @@ const WhatWorks = () => {
   );
 };
 
-export default WhatWorks;
+export default Intervation;
 
 const styles = StyleSheet.create({
     deeperImages : {

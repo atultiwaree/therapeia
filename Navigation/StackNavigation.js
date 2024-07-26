@@ -14,6 +14,7 @@ import Profile from '../src/Profile';
 import { counsellingCategory } from '../assets/data';
 import Counselling from '../src/SubCategories/Counselling';
 import WhatWorks from '../src/SubCategories/deeper/WhatWorks';
+import Intervation from '../src/SubCategories/deeper/Intervation';
 const Stack = createNativeStackNavigator();
 
 const StackNavigation = () => {
@@ -93,6 +94,15 @@ const StackNavigation = () => {
               <Stack.Screen
                 name="whatWorks"
                 component={WhatWorks}
+                options={{
+                  title: '',
+                  headerShadowVisible: false,
+                }}
+              />
+              
+              <Stack.Screen
+                name="intervation"
+                component={Intervation}
                 options={{
                   title: '',
                   headerShadowVisible: false,

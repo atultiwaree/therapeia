@@ -127,3 +127,20 @@ export const treatmentType = [
     path: require('./images/dollar.png'),
   },
 ];
+
+
+export const intervationData = [
+
+  {
+    id: 1,
+    title: 'Resources: Meditation/Activities etc.',
+    
+  },
+
+  {
+    id: 2,
+    title: 'Choose your Therapist',
+  },
+
+];
+
