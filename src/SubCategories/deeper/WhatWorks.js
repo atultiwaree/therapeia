@@ -12,6 +12,17 @@ import { navigate } from '../../../Navigation/RootNavigation';
 
 
 const WhatWorks = () => {
+
+
+  const handleScreen = (index) => {
+    console.log(index)
+        if(index === 3) {
+            navigate("aiscreen")
+        } else navigate("intervation")
+
+
+  }
+
   const EachCategoryBox = ({item}) => {
 
     return (
@@ -26,7 +37,7 @@ const WhatWorks = () => {
             alignItems : 'center'
           },
         ]}
-       onPress={() => navigate("intervation")}
+       onPress={() => handleScreen(item.id)}
      >
 
 

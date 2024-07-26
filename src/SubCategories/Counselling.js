@@ -10,6 +10,8 @@ import { navigate } from '../../Navigation/RootNavigation';
 
 const Counselling = () => {
   const EachCategoryBox = ({item}) => {
+
+
     return (
       <TouchableOpacity
         style={[
@@ -19,10 +21,9 @@ const Counselling = () => {
             backgroundColor: commonColor.BLACK,
           },
         ]}
-
         onPress={() => navigate("whatWorks")}
-
      >
+
         <Text
           style={[
             commonStyle.boldTitle,
@@ -51,7 +52,7 @@ const Counselling = () => {
 
       <FlatList
         data={counsellingData}
-        renderItem={({item, index}) => <EachCategoryBox item={item} />}
+        renderItem={({item, index}) => <EachCategoryBox item={item}  />}
         numColumns={2}
         columnWrapperStyle={{
           justifyContent: 'space-around',

@@ -7,10 +7,21 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import { counsellingData, intervationData, treatmentType } from '../../../assets/data';
+import { navigate } from '../../../Navigation/RootNavigation';
 
 
 
 const Intervation = () => {
+
+  const handleEach = (id) => {
+      if(id === 2) {
+        navigate("realtherapist")
+      }
+
+
+
+  }
+
   const EachCategoryBox = ({item}) => {
 
     return (
@@ -21,7 +32,9 @@ const Intervation = () => {
             width: responsiveWidth(85),
             backgroundColor: commonColor.BLACK,
           },
+        
         ]}
+        onPress={() => handleEach(item.id)}
      >
         <Text
           style={[
@@ -42,6 +55,7 @@ const Intervation = () => {
 
   return (
     <View style={commonStyle.container}>
+     
       <Text
         style={[
           commonStyle.boldTitle,
@@ -59,6 +73,7 @@ const Intervation = () => {
         contentContainerStyle = {{justifyContent : 'center', alignItems : 'center'}}
         keyExtractor={item => item.id}
       />
+
     </View>
   );
 };

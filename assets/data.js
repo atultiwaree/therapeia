@@ -144,3 +144,64 @@ export const intervationData = [
 
 ];
 
+
+export const anxietyData = [
+  {
+    id: 1,
+    title: 'Read',
+    
+  },
+  {
+    id: 2,
+    title: 'Video',
+  }, 
+  {
+    id: 2,
+    title: 'Learn with Instructor',
+  },  
+]
+
+export const anxietyDataResources = [
+  {
+    id: 1,
+    title: 'Blogs, Articles Etc.',
+    
+  },
+  {
+    id: 2,
+    title: 'YouTube Etc.',
+  }, 
+  {
+    id: 2,
+    title: 'Partner with Udemy Etc.',
+  },  
+]
+
+export const realTherapistDetails = [
+
+    {
+      id : 1,
+      heading : "Alex",
+      title : "Supportive, Encouraging",
+      path : require('../assets/images/man1.png')
+    },
+    {
+      id : 2,
+      heading : "Brian",
+      title : "Challenging, Goal Driven",
+      path : require('../assets/images/man2.png')
+    },
+    {
+      id : 3,
+      heading : "Sam",
+      title : "Qualified proffessional",
+      path : require('../assets/images/man3.png')
+    },
+    {
+      id : 4,
+      heading : "Karan",
+      title : "Stress Expert, Qualified",
+      path : require('../assets/images/man4.png')
+    },
+    
+]

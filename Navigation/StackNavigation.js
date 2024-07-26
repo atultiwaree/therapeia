@@ -15,6 +15,8 @@ import { counsellingCategory } from '../assets/data';
 import Counselling from '../src/SubCategories/Counselling';
 import WhatWorks from '../src/SubCategories/deeper/WhatWorks';
 import Intervation from '../src/SubCategories/deeper/Intervation';
+import AIScreen from '../src/SubCategories/ActionScreen/AIScreen';
+import RealTherapist from '../src/SubCategories/ActionScreen/RealTherapistScreen';
 const Stack = createNativeStackNavigator();
 
 const StackNavigation = () => {
@@ -103,6 +105,25 @@ const StackNavigation = () => {
               <Stack.Screen
                 name="intervation"
                 component={Intervation}
+                options={{
+                  title: '',
+                  headerShadowVisible: false,
+                }}
+              />
+              
+
+              <Stack.Screen
+                name="aiscreen"
+                component={AIScreen}
+                options={{
+                  title: '',
+                  headerShadowVisible: false,
+                }}
+              />
+
+              <Stack.Screen
+                name="realtherapist"
+                component={RealTherapist}
                 options={{
                   title: '',
                   headerShadowVisible: false,
