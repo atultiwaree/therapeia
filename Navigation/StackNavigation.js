@@ -13,6 +13,7 @@ import CategoryBack from './CategoryHeader';
 import Profile from '../src/Profile';
 import { counsellingCategory } from '../assets/data';
 import Counselling from '../src/SubCategories/Counselling';
+import WhatWorks from '../src/SubCategories/deeper/WhatWorks';
 const Stack = createNativeStackNavigator();
 
 const StackNavigation = () => {
@@ -83,6 +84,15 @@ const StackNavigation = () => {
               <Stack.Screen
                 name="counselling"
                 component={Counselling}
+                options={{
+                  title: '',
+                  headerShadowVisible: false,
+                }}
+              />
+
+              <Stack.Screen
+                name="whatWorks"
+                component={WhatWorks}
                 options={{
                   title: '',
                   headerShadowVisible: false,

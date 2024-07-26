@@ -6,6 +6,7 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import {counsellingData} from '../../assets/data';
+import { navigate } from '../../Navigation/RootNavigation';
 
 const Counselling = () => {
   const EachCategoryBox = ({item}) => {
@@ -18,6 +19,9 @@ const Counselling = () => {
             backgroundColor: commonColor.BLACK,
           },
         ]}
+
+        onPress={() => navigate("whatWorks")}
+
      >
         <Text
           style={[

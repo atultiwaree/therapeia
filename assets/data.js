@@ -109,3 +109,21 @@ export const counsellingData = [
     title: 'LGBTQ+',
   },
 ];
+
+export const treatmentType = [
+  {
+    id: 1,
+    title: 'Self Care/Self Guided',
+    path: require('./images/dollar.png'),
+  },
+  {
+    id: 2,
+    title: 'Support Therapist',
+    path: require('./images/free.png'),
+  },
+  {
+    id: 3,
+    title: 'Your AI Therapist',
+    path: require('./images/dollar.png'),
+  },
+];
