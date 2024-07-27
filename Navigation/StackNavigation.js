@@ -11,12 +11,13 @@ import CategoryScreen from '../src/CategoryScreen';
 import {useSelector} from 'react-redux';
 import CategoryBack from './CategoryHeader';
 import Profile from '../src/Profile';
-import { counsellingCategory } from '../assets/data';
+import {counsellingCategory} from '../assets/data';
 import Counselling from '../src/SubCategories/Counselling';
 import WhatWorks from '../src/SubCategories/deeper/WhatWorks';
 import Intervation from '../src/SubCategories/deeper/Intervation';
 import AIScreen from '../src/SubCategories/ActionScreen/AIScreen';
 import RealTherapist from '../src/SubCategories/ActionScreen/RealTherapistScreen';
+import ChatWindow from '../src/ChatWindow';
 const Stack = createNativeStackNavigator();
 
 const StackNavigation = () => {
@@ -101,7 +102,7 @@ const StackNavigation = () => {
                   headerShadowVisible: false,
                 }}
               />
-              
+
               <Stack.Screen
                 name="intervation"
                 component={Intervation}
@@ -110,7 +111,15 @@ const StackNavigation = () => {
                   headerShadowVisible: false,
                 }}
               />
-              
+
+              <Stack.Screen
+                name="chatwindow"
+                component={ChatWindow}
+                options={{
+                  title: '',
+                  headerShadowVisible: false,
+                }}
+              />
 
               <Stack.Screen
                 name="aiscreen"
@@ -129,8 +138,6 @@ const StackNavigation = () => {
                   headerShadowVisible: false,
                 }}
               />
-
-
             </>
           ) : (
             <>
