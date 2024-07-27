@@ -116,8 +116,7 @@ const ChatWindow = () => {
       
       theme={{
         ...defaultTheme,
-        colors: { ...defaultTheme.colors, inputBackground: '#282828', background : commonColor.MAIN },
-        
+        colors: { ...defaultTheme.colors, inputBackground: '#282828', background : commonColor.MAIN, primary : "#282828" },
       }}
       
       messages={messages} onSendPress={handleSendPress} user={user1} />
