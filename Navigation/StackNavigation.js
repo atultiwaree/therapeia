@@ -18,6 +18,9 @@ import Intervation from '../src/SubCategories/deeper/Intervation';
 import AIScreen from '../src/SubCategories/ActionScreen/AIScreen';
 import RealTherapist from '../src/SubCategories/ActionScreen/RealTherapistScreen';
 import ChatWindow from '../src/ChatWindow';
+
+import SingleAfterCategory from '../src/SingleAfterCategory';
+import Maps from '../src/SubCategories/ActionScreen/Map';
 const Stack = createNativeStackNavigator();
 
 const StackNavigation = () => {
@@ -124,6 +127,25 @@ const StackNavigation = () => {
               <Stack.Screen
                 name="aiscreen"
                 component={AIScreen}
+                options={{
+                  title: '',
+                  headerShadowVisible: false,
+                }}
+              />
+
+             <Stack.Screen
+                name="map"
+                component={Maps}
+                options={{
+                  title: '',
+                  headerShadowVisible: false,
+                }}
+              />
+
+
+              <Stack.Screen
+                name="singleAfterCategory"
+                component={SingleAfterCategory}
                 options={{
                   title: '',
                   headerShadowVisible: false,

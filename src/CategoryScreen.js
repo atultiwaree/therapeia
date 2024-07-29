@@ -14,27 +14,38 @@ import {
   responsiveFontSize,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import { navigate } from '../Navigation/RootNavigation';
+import {navigate} from '../Navigation/RootNavigation';
 
 const CategoryScreen = () => {
-  
+  const handleEachCategory = index => {
+    if (index === 0) {
+      navigate('counselling');
+    }
 
-  const handleEachCategory = (index) => {
-    
-      if(index === 0) {
-        navigate("counselling")
-      }
-    
-  }
+    if( index === 2 ) {
+      navigate("counselling", { category : "educate" })
+    }
+
+    if( index === 6 ) {
+      navigate("singleAfterCategory", { category : "community" })
+    }
+
+    if(index === 4) {
+      navigate("singleAfterCategory", { category : "meditation" })
+    }
+
+
+    if(index === 7) {
+      navigate("singleAfterCategory", { category : "therapist" })
+    }
+
+  };
 
   const EachCategoryBox = ({item}) => {
-
     return (
-      <TouchableOpacity  style={styles.box}
-      
-      onPress={() => handleEachCategory(item.id)}
-      
-      >
+      <TouchableOpacity
+        style={styles.box}
+        onPress={() => handleEachCategory(item.id)}>
         <Image
           source={item.path}
           resizeMethod="resize"
@@ -58,8 +69,6 @@ const CategoryScreen = () => {
         </Text>
       </TouchableOpacity>
     );
-
-
   };
 
   return (

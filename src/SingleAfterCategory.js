@@ -7,43 +7,40 @@ import {
   View,
 } from 'react-native';
 import React from 'react';
-import commonStyle, {commonColor, commonSize} from '../../../Styles/AppStyles';
-
+import commonStyle, {commonColor, commonSize} from '../Styles/AppStyles';
 import {
   responsiveFontSize,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import {
+  afterCommunityCategory,
   anxietyDataResources,
-  communityLocation,
   counsellingData,
   intervationData,
-  therapistEnrollMentProcess,
+  mediTationMethod,
+  therapistEnrollMent,
   treatmentType,
-} from '../../../assets/data';
-import {navigate} from '../../../Navigation/RootNavigation';
+} from '../assets/data';
+import {navigate} from '../Navigation/RootNavigation';
 
-const Intervation = ({route}) => {
+const SingleAfterCategory = ({route}) => {
   const handleEach = id => {
-    if (id === 2) {
-      navigate('realtherapist');
+    if (route?.params?.category === 'community') {
+      navigate('intervation', {category: 'community'});
     }
-
-    if (id === 420) {
-      navigate('map');
+    if(route?.params?.category === "therapist") {
+      navigate('intervation', {category: 'therapist'});
     }
-
-
-
   };
 
   const EachCategoryBox = ({item}) => {
+    console.log(route?.params?.category);
+
     return (
       <TouchableOpacity
         style={[
           commonStyle.button,
           {
-            
             width: responsiveWidth(85),
             backgroundColor: commonColor.BLACK,
           },
@@ -73,19 +70,17 @@ const Intervation = ({route}) => {
           commonStyle.boldTitle,
           {fontFamily: 'Poppins-Medium', marginTop: responsiveWidth(2)},
         ]}>
-        {route?.params?.category === 'therapist'
-          ? 'Enrollment Process'
-          : 'Interventions'}
+        { route?.params?.category === 'therapist' ? "Enrollment pathway" : "Interventions"}
       </Text>
 
       <FlatList
         data={
-          route?.params?.category === 'educate'
-            ? anxietyDataResources
-            : route?.params?.category === 'community'
-            ? communityLocation
+          route?.params?.category === 'community'
+            ? afterCommunityCategory
+            : route?.params?.category === 'meditation'
+            ? mediTationMethod
             : route?.params?.category === 'therapist'
-            ? therapistEnrollMentProcess
+            ? therapistEnrollMent
             : intervationData
         }
         renderItem={({item, index}) => <EachCategoryBox item={item} />}
@@ -99,7 +94,7 @@ const Intervation = ({route}) => {
   );
 };
 
-export default Intervation;
+export default SingleAfterCategory;
 
 const styles = StyleSheet.create({
   deeperImages: {

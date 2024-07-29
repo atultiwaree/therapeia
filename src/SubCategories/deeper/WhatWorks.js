@@ -1,4 +1,11 @@
-import {FlatList, Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  FlatList,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React from 'react';
 import commonStyle, {commonColor, commonSize} from '../../../Styles/AppStyles';
 
@@ -6,25 +13,24 @@ import {
   responsiveFontSize,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import { counsellingData, treatmentType } from '../../../assets/data';
-import { navigate } from '../../../Navigation/RootNavigation';
+import {
+  anxietyData,
+  counsellingData,
+  treatmentType,
+} from '../../../assets/data';
+import {navigate} from '../../../Navigation/RootNavigation';
 
+const WhatWorks = ({route}) => {
+  console.log(route?.params);
 
-
-const WhatWorks = () => {
-
-
-  const handleScreen = (index) => {
-    console.log(index)
-        if(index === 3) {
-            navigate("aiscreen")
-        } else navigate("intervation")
-
-
-  }
+  const handleScreen = index => {
+    console.log(index);
+    if (index === 3) {
+      navigate('aiscreen');
+    } else navigate('intervation', { category : route?.params?.category });
+  };
 
   const EachCategoryBox = ({item}) => {
-
     return (
       <TouchableOpacity
         style={[
@@ -32,20 +38,25 @@ const WhatWorks = () => {
           {
             width: responsiveWidth(85),
             backgroundColor: commonColor.BLACK,
-            flexDirection : 'row',
-            justifyContent : 'space-around',
-            alignItems : 'center'
+            flexDirection: 'row',
+            justifyContent: 'space-around',
+            alignItems: 'center',
           },
         ]}
-       onPress={() => handleScreen(item.id)}
-     >
+        onPress={() => handleScreen(item.id)}>
 
+        
 
-
-        <View style = {styles.deeperImages}>
-        <Image  source={item.path} resizeMethod='resize' resizeMode='contain' style = {{width : "100%", height : "100%"}}/>
-        </View>
-
+        {route?.params?.category !== 'educate' && (
+          <View style={styles.deeperImages}>
+            <Image
+              source={item.path}
+              resizeMethod="resize"
+              resizeMode="contain"
+              style={{width: '100%', height: '100%'}}
+            />
+          </View>
+        )}
 
         <Text
           style={[
@@ -55,8 +66,8 @@ const WhatWorks = () => {
               fontSize: responsiveFontSize(2.2),
               marginTop: responsiveWidth(2),
               color: '#fff',
-              width : responsiveWidth(60),
-              textAlign : 'left'
+              width: responsiveWidth(60),
+              textAlign: 'left',
             },
           ]}>
           {item.title}
@@ -72,16 +83,18 @@ const WhatWorks = () => {
           commonStyle.boldTitle,
           {fontFamily: 'Poppins-Medium', marginTop: responsiveWidth(2)},
         ]}>
-        Choose what works for you best
+        { route?.params?.category === "educate" ? " Resources" :  "Choose what works for you best"}
       </Text>
 
       <FlatList
-        data={treatmentType}
+        data={
+          route?.params?.category === 'educate' ? anxietyData : treatmentType
+        }
         renderItem={({item, index}) => <EachCategoryBox item={item} />}
         style={{
-          marginTop: responsiveWidth(10),          
+          marginTop: responsiveWidth(10),
         }}
-        contentContainerStyle = {{justifyContent : 'center', alignItems : 'center'}}
+        contentContainerStyle={{justifyContent: 'center', alignItems: 'center'}}
         keyExtractor={item => item.id}
       />
     </View>
@@ -91,9 +104,9 @@ const WhatWorks = () => {
 export default WhatWorks;
 
 const styles = StyleSheet.create({
-    deeperImages : {
-        height : responsiveWidth(19),
-        width : responsiveWidth(9),
-        resizeMode : "contain"
-    }
+  deeperImages: {
+    height: responsiveWidth(19),
+    width: responsiveWidth(9),
+    resizeMode: 'contain',
+  },
 });

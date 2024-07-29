@@ -38,7 +38,7 @@ export const counsellingCategory = [
     path: require('../assets/icons/activity.png'),
   },
   {
-    title: 'Breathe',
+    title: 'Meditation',
     id: 4,
     path: require('../assets/icons/breath.png'),
   },
@@ -128,80 +128,165 @@ export const treatmentType = [
   },
 ];
 
-
 export const intervationData = [
-
   {
     id: 1,
     title: 'Resources: Meditation/Activities etc.',
-    
   },
 
   {
     id: 2,
     title: 'Choose your Therapist',
   },
-
 ];
-
 
 export const anxietyData = [
   {
     id: 1,
     title: 'Read',
-    
   },
   {
     id: 2,
     title: 'Video',
-  }, 
+  },
   {
-    id: 2,
+    id: 3,
     title: 'Learn with Instructor',
-  },  
-]
+  },
+];
 
 export const anxietyDataResources = [
   {
     id: 1,
     title: 'Blogs, Articles Etc.',
-    
   },
   {
     id: 2,
     title: 'YouTube Etc.',
-  }, 
+  },
   {
-    id: 2,
+    id: 3,
     title: 'Partner with Udemy Etc.',
-  },  
-]
+  },
+];
 
 export const realTherapistDetails = [
+  {
+    id: 1,
+    heading: 'Alex',
+    title: 'Supportive, Encouraging',
+    path: require('../assets/images/man1.png'),
+  },
+  {
+    id: 2,
+    heading: 'Brian',
+    title: 'Challenging, Goal Driven',
+    path: require('../assets/images/man2.png'),
+  },
+  {
+    id: 3,
+    heading: 'Sam',
+    title: 'Qualified proffessional',
+    path: require('../assets/images/man3.png'),
+  },
+  {
+    id: 4,
+    heading: 'Karan',
+    title: 'Stress Expert, Qualified',
+    path: require('../assets/images/man4.png'),
+  },
+];
 
-    {
-      id : 1,
-      heading : "Alex",
-      title : "Supportive, Encouraging",
-      path : require('../assets/images/man1.png')
-    },
-    {
-      id : 2,
-      heading : "Brian",
-      title : "Challenging, Goal Driven",
-      path : require('../assets/images/man2.png')
-    },
-    {
-      id : 3,
-      heading : "Sam",
-      title : "Qualified proffessional",
-      path : require('../assets/images/man3.png')
-    },
-    {
-      id : 4,
-      heading : "Karan",
-      title : "Stress Expert, Qualified",
-      path : require('../assets/images/man4.png')
-    },
-    
+export const afterCommunityCategory = [
+  {
+    id: 1,
+    title: 'Community Support Group',
+  },
+  {
+    id: 2,
+    title: 'Faith Based Support',
+  },
+  {
+    id: 3,
+    title: 'Therapist',
+  },
+  {
+    id: 4,
+    title: 'LGBTQ+ Support Group',
+  },
+
+  {
+    id: 5,
+    title: 'Seminar / Workshops',
+  },
+];
+
+export const communityLocation = [
+  {
+    id: 420,
+    title: 'City',
+  },
+];
+
+export const mediTationMethod = [
+  {
+    id: 1,
+    title: 'Music',
+  },
+  {
+    id: 2,
+    title: 'Guided Meditation',
+  },
+  {
+    id: 3,
+    title: 'Mindfulness Meditations',
+  },
+  {
+    id: 4,
+    title: 'Mantra Meditations',
+  },
+  {
+    id: 5,
+    title: 'Progressive Relaxation',
+  },
+  {
+    id: 6,
+    title: 'Visualization Meditation',
+  },
+  {
+    id: 7,
+    title: 'Movement Meditation',
+  },
+];
+
+export const therapistEnrollMent = [
+
+  {
+    id: 1,
+    title: 'Student Therapist',
+  },
+  {
+    id: 2,
+    title: 'Supervisor Therapist',
+  },
+  {
+    id: 3,
+    title: 'Licensed Therapist',
+  },
+
+]
+
+export const therapistEnrollMentProcess = [
+  {
+    id: 1,
+    title: 'Assessment / Validation',
+  },
+  {
+    id: 2,
+    title: 'Credential Validation',
+  },
+  {
+    id: 3,
+    title: 'Credential Validation',
+  },
 ]
