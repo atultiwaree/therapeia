@@ -21,6 +21,7 @@ import ChatWindow from '../src/ChatWindow';
 
 import SingleAfterCategory from '../src/SingleAfterCategory';
 import Maps from '../src/SubCategories/ActionScreen/Map';
+import Question from '../src/dummy/Question';
 const Stack = createNativeStackNavigator();
 
 const StackNavigation = () => {
@@ -146,6 +147,15 @@ const StackNavigation = () => {
               <Stack.Screen
                 name="singleAfterCategory"
                 component={SingleAfterCategory}
+                options={{
+                  title: '',
+                  headerShadowVisible: false,
+                }}
+              />
+
+            <Stack.Screen
+                name="question"
+                component={Question}
                 options={{
                   title: '',
                   headerShadowVisible: false,

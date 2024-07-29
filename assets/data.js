@@ -290,3 +290,18 @@ export const therapistEnrollMentProcess = [
     title: 'Credential Validation',
   },
 ]
+
+export const howToCommunicate = [
+   {
+    id : 1,
+    title : "Text"
+   },
+   {
+    id : 2,
+    title : "Call"
+   },
+   {
+    id : 3,
+    title : "Book appointment"
+   }
+]

@@ -1,4 +1,11 @@
-import {StyleSheet, Text, View, TouchableOpacity, Image, FlatList} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  FlatList,
+} from 'react-native';
 import React from 'react';
 import commonStyle, {commonColor, commonSize} from '../../../Styles/AppStyles';
 import {
@@ -6,13 +13,22 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import ActionTherapist from '../../Components/ActionTherapist';
-import { realTherapistDetails } from '../../../assets/data';
+import {realTherapistDetails} from '../../../assets/data';
+import ChooseTherapist from '../../ActionSheet/ChooseTherapist';
 
 const RealTherapist = () => {
-
   const EachCategoryBox = ({item}) => {
-    return <ActionTherapist heading={item.heading} title={item.title} path={item.path} />
-  }
+    return (
+
+        <ActionTherapist
+          heading={item.heading}
+          title={item.title}
+          path={item.path}
+          type = {"real"}
+        />
+   
+    );
+  };
 
   return (
     <View style={commonStyle.container}>
@@ -23,7 +39,6 @@ const RealTherapist = () => {
         ]}>
         Select your therapist
       </Text>
-
 
       <FlatList
         data={realTherapistDetails}
@@ -38,13 +53,11 @@ const RealTherapist = () => {
         keyExtractor={item => item.id}
       />
 
-
+      {/* <ChooseTherapist/> */}
     </View>
   );
 };
 
 export default RealTherapist;
 
-const styles = StyleSheet.create({
-
-});
+const styles = StyleSheet.create({});

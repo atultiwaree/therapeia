@@ -6,13 +6,18 @@ import {
   responsiveFontSize,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
+import { navigate } from '../../Navigation/RootNavigation';
 
-const ActionTherapist = ({heading, title, path}) => {
+const ActionTherapist = ({heading, title, path, type}) => {
 
     console.log(path)
 
   return (
-    <TouchableOpacity style={styles.box}>
+    <TouchableOpacity onPress={() => {
+      if(type === "real") {
+        navigate("question")
+      }
+    }} style={styles.box}>
       <Image
         source={path}
         resizeMethod="resize"
