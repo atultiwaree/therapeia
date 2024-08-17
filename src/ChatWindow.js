@@ -1,14 +1,10 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React, {useCallback, useEffect, useState} from 'react';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {Chat, MessageType, defaultTheme} from '@/react-native-chat-ui';
-import commonStyle, {commonColor} from '../Styles/AppStyles';
+import  {commonColor} from '../Styles/AppStyles';
 import {GiftedChat, Bubble} from 'react-native-gifted-chat';
 import {useSendMessageMutation} from '../redux/apis';
-import TypingIndicator from 'react-native-gifted-chat/lib/TypingIndicator';
 import LottieView from 'lottie-react-native';
 import {responsiveWidth} from 'react-native-responsive-dimensions';
-import RenderHtml from 'react-native-render-html';
 import Markdown from 'react-native-markdown-display';
 
 
@@ -19,7 +15,6 @@ const renderMessage = (props) => {
     <View style={styles.messageContainer}>
       <Markdown
         style={styles.markdown}
-        // Optionally customize the Markdown styles here
       >
         {currentMessage.text}
       </Markdown>
