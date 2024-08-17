@@ -1,129 +1,209 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React, {useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {Chat, MessageType, defaultTheme} from '@flyerhq/react-native-chat-ui';
-import commonStyle, { commonColor } from '../Styles/AppStyles';
-const uuidv4 = () => {
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
-    const r = Math.floor(Math.random() * 16);
-    const v = c === 'x' ? r : (r % 4) + 8;
-    return v.toString(16);
-  });
+import {Chat, MessageType, defaultTheme} from '@/react-native-chat-ui';
+import commonStyle, {commonColor} from '../Styles/AppStyles';
+import {GiftedChat, Bubble} from 'react-native-gifted-chat';
+import {useSendMessageMutation} from '../redux/apis';
+import TypingIndicator from 'react-native-gifted-chat/lib/TypingIndicator';
+import LottieView from 'lottie-react-native';
+import {responsiveWidth} from 'react-native-responsive-dimensions';
+import RenderHtml from 'react-native-render-html';
+import Markdown from 'react-native-markdown-display';
+
+
+const renderMessage = (props) => {
+  const { currentMessage } = props;
+
+  return (
+    <View style={styles.messageContainer}>
+      <Markdown
+        style={styles.markdown}
+        // Optionally customize the Markdown styles here
+      >
+        {currentMessage.text}
+      </Markdown>
+    </View>
+  );
 };
 
+
+
 const ChatWindow = () => {
-  const user1 = {id: '06c33e8b-e835-4736-80f4-63f44b66666d'};
-  const user2 = {id: '06c33e8b-e835-4736-80f4-63f44b66666e'};
+  const [messages, setMessages] = useState([]);
 
-  const [messages, setMessages] = useState([
-    {
-      author: user2,
-      createdAt: Date.now(),
-      id: uuidv4(),
-      text: 'I have a few exercises that might help you. Would you like to try a thought diary to track and challenge your negative thoughts, or perhaps some relaxation techniques to help you unwind?',
-      type: 'text',
-    },
-    {
-      author: user2,
-      createdAt: Date.now(),
-      id: uuidv4(),
-      text: 'When we feel low, it can help to engage in activities that bring us joy or a sense of accomplishment. Is there something you enjoy doing or something that helps you relax? For example, going for a walk, listening to music, or working on a hobby?',
-      type: 'text',
-    },
+  const [sendMessage] = useSendMessageMutation();
 
-    {
-      author: user2,
-      createdAt: Date.now(),
-      id: uuidv4(),
-      text: 'That’s a great example of your competence and hard work. Sometimes, our minds focus on the negative and ignore the positive. How do you feel when you think about that positive feedback?',
-      type: 'text',
-    },
-    {
-      author: user1,
-      createdAt: Date.now(),
-      id: uuidv4(),
-      text: 'Well, I did finish a big project last week, and my manager said I did a good job.',
-      type: 'text',
-    },
-    {
-      author: user2,
-      createdAt: Date.now(),
-      id: uuidv4(),
-      text: "Let's explore that thought. What evidence do you have that you are failing at your job? Are there any recent achievements or positive feedback that you might be overlooking?",
-      type: 'text',
-    },
+  const [loading, setLoading] = useState(false);
 
-    {
-      author: user1,
-      createdAt: Date.now(),
-      id: uuidv4(),
-      text: 'I feel like I’m failing at my job.',
-      type: 'text',
-    },
+  const TypingComponent = ({loading}) => {
 
-    {
-      author: user2,
-      createdAt: Date.now(),
-      id: uuidv4(),
-      text: "sounds like you had a difficult experience. Can you identify the specific thoughts that are making you feel this way? For example, 'I’m not good enough' seems like one. Are there others?",
-      type: 'text',
-    },
+    if(loading) {
+      return (
+        <View style = {{width : responsiveWidth(34), paddingLeft : responsiveWidth(14), marginBottom : responsiveWidth(4)}}>
+          <LottieView
+            source={require('../assets/chat_load.json')}
+            style={{height: responsiveWidth(10), width: responsiveWidth(15)}}
+            autoPlay
+          />
+        </View>
+      );
+    } else {
+      return null
+    }
 
-    {
-      author: user1,
-      createdAt: Date.now(),
-      id: uuidv4(),
-      text: 'I had a tough day at work, and I feel like I’m not good enough.',
-      type: 'text',
-    },
-
-    {
-      author: user2,
-      createdAt: Date.now(),
-      id: uuidv4(),
-      text: "I'm sorry to hear that you're feeling low. Can you tell me more about what’s been going on or what might have caused these feelings?",
-      type: 'text',
-    },
-
-    {
-      author: user1,
-      createdAt: Date.now(),
-      id: uuidv4(),
-      text: 'I am feeling very low today',
-      type: 'text',
-    },
-  ]);
-
-  const addMessage = message => {
-    setMessages([message, ...messages]);
+    
   };
 
-  const handleSendPress = message => {
-    const textMessage = {
-      author: user1,
-      createdAt: Date.now(),
-      id: uuidv4(),
-      text: message.text,
-      type: 'text',
-    };
-    addMessage(textMessage);
+  
+  useEffect(() => {
+    setMessages([
+      {
+        _id: 1,
+        text: `Welcome to therapeia, How may I help you today?`,
+        createdAt: new Date(),
+        user: {
+          _id: 2,
+          name: 'React Native',
+          avatar: 'https://picsum.photos/200',
+        },
+      },
+    ]);
+  }, []);
+
+  const onSend = useCallback(async (messages = []) => {
+    setMessages(previousMessages =>
+      GiftedChat.append(previousMessages, messages),
+    );
+
+    setLoading(true);
+
+    const {data, error} = await sendMessage({
+      body: {question: messages[0]?.text},
+    });
+
+
+
+    if (data?.success) {
+      setLoading(false);
+      setMessages(previousMessages =>
+        GiftedChat.append(previousMessages, {
+          _id: previousMessages.length + 1,
+          text: data?.message,
+          createdAt: new Date(),
+          user: {
+            _id: 2,
+            name: 'React Native',
+            avatar: 'https://picsum.photos/200',
+          },
+        }),
+      );
+    }
+
+    if (error) {
+      console.log(error.message);
+    }
+  }, []);
+
+
+  const renderBubble = props => {
+    return (
+      <Bubble
+      renderMessageText={renderMessage}
+        {...props}
+        wrapperStyle={{
+          right: {
+            backgroundColor: "#fff",
+            paddingRight : responsiveWidth(3),
+            paddingLeft : responsiveWidth(2),
+          },
+          left : {
+            backgroundColor : "#FFE5D9",
+            paddingRight : responsiveWidth(3),
+            paddingLeft : responsiveWidth(2),
+            width : responsiveWidth(80)
+
+          }
+        }}
+
+        textStyle={{
+          right : {
+            color : 'red',
+            fontFamily : 'Poppins-Medium'
+          }
+        }}
+      />
+    );
   };
 
   return (
-    <View
-      style={[commonStyle.container, {paddingHorizontal: 0, paddingBottom: 0}]}>
-      <Chat
-      
-      theme={{
-        ...defaultTheme,
-        colors: { ...defaultTheme.colors, inputBackground: '#282828', background : commonColor.MAIN, primary : "#282828" },
-      }}
-      
-      messages={messages} onSendPress={handleSendPress} user={user1} />
+    <View style={{backgroundColor: commonColor.MAIN, flex: 1}}>
+      <GiftedChat
+        messages={messages}
+        onSend={messages => onSend(messages)}
+        user={{
+          _id: 1,
+        }}
+        renderBubble={renderBubble}
+        shouldUpdateMessage={() => {
+          return true;
+        }}
+        renderFooter={() =>   <TypingComponent loading = {loading}/>}
+        disableComposer = {loading}
+      />
     </View>
   );
 };
 
 export default ChatWindow;
 
-const styles = StyleSheet.create({});
+
+
+const styles = StyleSheet.create({
+  markdown: {
+    paragraph: {
+      marginBottom: 8,
+    },
+    heading1: {
+      fontSize: 20,
+      fontWeight: 'bold',
+    },
+    strong: {
+      fontWeight: 'bold',
+    },
+    em: {
+      fontStyle: 'italic',
+    },
+    list: {
+      marginVertical: 5,
+    },
+    listItem: {
+      fontSize: 16,
+    },
+    
+
+    markdown: {
+      // Set your desired font family
+      fontFamily : 'Poppins-Bold',
+    },
+    heading1: {
+      fontFamily : 'Poppins-Bold',
+    },
+    heading2: {
+      fontFamily : 'Poppins-Bold',
+    },
+
+    paragraph: {
+      fontFamily: 'Poppins-Regular', // Set the font family for normal text
+    },
+    list: {
+      fontFamily: 'Poppins-SemiBold', // Set the font family for list items
+    },
+    listItem: {
+      fontFamily: 'Poppins-Medium', // Set the font family for list items
+    },
+    text: {
+      fontFamily : 'Poppins-Medium',
+    },
+  },
+});

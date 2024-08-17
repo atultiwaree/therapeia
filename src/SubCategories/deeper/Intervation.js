@@ -24,13 +24,22 @@ import {
 import {navigate} from '../../../Navigation/RootNavigation';
 
 const Intervation = ({route}) => {
-  const handleEach = id => {
-    if (id === 2) {
-      navigate('realtherapist');
-    }
+  
 
-    if (id === 420) {
-      navigate('map');
+
+
+  const handleEach = id => {
+    
+    if( route?.params?.category === 'educate') {
+      console.log("fuck")
+    } else {
+      if (id === 2) {
+        navigate('realtherapist');
+      }
+  
+      if (id === 420) {
+        navigate('map');
+      }
     }
 
 
