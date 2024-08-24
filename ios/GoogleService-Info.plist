@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>160256176538-bd208dt1orouitt2o899f0oupos9222h.apps.googleusercontent.com</string>
+	<string>160256176538-40jogocqo8g2qhnd8ab64cf85ec1upan.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.160256176538-bd208dt1orouitt2o899f0oupos9222h</string>
+	<string>com.googleusercontent.apps.160256176538-40jogocqo8g2qhnd8ab64cf85ec1upan</string>
 	<key>ANDROID_CLIENT_ID</key>
 	<string>160256176538-fvlhsrsptr0cl22mhfeugcq0m5pvbcgl.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
@@ -15,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>org.reactjs.native.example.therapeia</string>
+	<string>com.therapeia.app</string>
 	<key>PROJECT_ID</key>
 	<string>therapeia-1d5f7</string>
 	<key>STORAGE_BUCKET</key>
@@ -31,7 +31,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:160256176538:ios:1d7bef9e768cd76cad0a23</string>
+	<string>1:160256176538:ios:905592860ed67d20ad0a23</string>
 	<key>DATABASE_URL</key>
 	<string>https://therapeia-1d5f7-default-rtdb.firebaseio.com</string>
 </dict>

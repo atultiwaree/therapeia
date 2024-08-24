@@ -6,7 +6,7 @@ import {
   statusCodes,
 } from '@react-native-google-signin/google-signin';
 import store from '../redux/store';
-import { resetUser } from '../redux/reducers/Auth';
+import {resetUser} from '../redux/reducers/Auth';
 
 GoogleSignin.configure({
   webClientId:
@@ -53,15 +53,15 @@ const googleSignIn = async () => {
     //   },
     // );
 
-    console.log(mainINfo, "::::::::::::")
+    console.log(mainINfo, '::::::::::::');
     // console.log("{}{}{}[}{}{}", mainINfo.user.displayName, mainINfo.user.email, mainINfo.user.uid)
 
     return {
       name: mainINfo.user.displayName,
       email: mainINfo.user.email,
       uid: mainINfo.user.uid,
-      profile : mainINfo.user.photoURL,
-      loggedIn : true
+      profile: mainINfo.user.photoURL,
+      loggedIn: true,
     };
 
     // return serverResponse;
@@ -75,15 +75,15 @@ const googleSignIn = async () => {
 
 const signOut = async () => {
   try {
-    
-    
-    
-    store.dispatch(resetUser())
-    await GoogleSignin.signOut();
-    await auth().signOut();
+    let signedInWithGoogle = auth().currentUser;
 
-    console.log('Sign out');
-    
+    store.dispatch(resetUser());
+    if (signedInWithGoogle) {
+      await GoogleSignin.signOut();
+      await auth().signOut();
+    } else {
+      console.log('User not signed in with Google to logout');
+    }
   } catch (error) {
     console.error(error);
   }

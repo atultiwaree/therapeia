@@ -20,84 +20,79 @@ const SignUp = () => {
   const [agree, setAgree] = useState(false);
 
   const handleSignUp = useCallback(async () => {
-    // Alert.alert('fuck off');
-
+    // Check if the user has agreed to terms and conditions
+    if (!agree) {
+      showMessage({
+        message: 'You must agree to the terms and conditions',
+        type: 'warning',
+      });
+      return;
+    }
+  
     if (email.length === 0) {
-      // Alert.alert('Please enter email ');
-
       showMessage({
         message: 'Please enter email',
         type: 'info',
       });
+    } else if (!validEmail(email)) {
+      showMessage({
+        message: 'Please enter a valid email address',
+        type: 'danger',
+      });
+    } else if (passwword.length === 0 || confirmPassword.length === 0) {
+      showMessage({
+        message: 'Please enter password and confirm password',
+        type: 'warning',
+      });
+    } else if (passwword !== confirmPassword) {
+      showMessage({
+        message: 'Password and ConfirmPassword did not match',
+        type: 'danger',
+      });
     } else {
-      if (validEmail(email)) {
-        if (passwword.length === 0 || confirmPassword.length === 0) {
+      try {
+        let x = await auth().createUserWithEmailAndPassword(
+          email,
+          passwword,
+        );
+  
+        console.log(x);
+  
+        if (x.additionalUserInfo.isNewUser) {
           showMessage({
-            message: 'Please enter password and confirm password',
-            type: 'warning',
+            message: 'Account created, please login',
+            type: 'success',
           });
-        } else {
-          if (passwword === confirmPassword) {
-            try {
-              let x = await auth().createUserWithEmailAndPassword(
-                email,
-                passwword,
-              );
-
-              console.log(x);
-
-              if (x.additionalUserInfo.isNewUser) {
-                showMessage({
-                  message: 'Account created, please login',
-                  type: 'success',
-                });
-
-                setEmail('');
-                setPassword('');
-                setAgree(false);
-                navigate('Signin');
-              }
-            } catch (error) {
-              console.log(error);
-
-              if (error.code === 'auth/email-already-in-use') {
-                // Alert.alert();
-
-                showMessage({
-                  message: 'That email address is already in use!',
-                  type: 'info',
-                });
-              }
-
-              if (error.code === 'auth/invalid-email') {
-                showMessage({
-                  message: 'That email address is invalid!',
-                  type: 'danger',
-                });
-              }
-
-              if (error.code === 'auth/weak-password') {
-                showMessage({
-                  message: 'Please use strong password',
-                  type: 'danger',
-                });
-              }
-            }
-          } else {
-            showMessage({
-              message: 'Password and ConfirmPassword did not matched',
-              type: 'danger',
-            });
-          }
+  
+          setEmail('');
+          setPassword('');
+          setConfirmPassword('');
+          setAgree(false); // Reset agree state if needed
+          navigate('Signin');
         }
-      } else {
-        showMessage({
-          message: 'Please enter a valid email address',
-          type: 'danger',
-        });
+      } catch (error) {
+        console.log(error);
+  
+        if (error.code === 'auth/email-already-in-use') {
+          showMessage({
+            message: 'That email address is already in use!',
+            type: 'info',
+          });
+        } else if (error.code === 'auth/invalid-email') {
+          showMessage({
+            message: 'That email address is invalid!',
+            type: 'danger',
+          });
+        } else if (error.code === 'auth/weak-password') {
+          showMessage({
+            message: 'Please use a strong password',
+            type: 'danger',
+          });
+        }
       }
     }
-  }, [email, passwword, confirmPassword]);
+  }, [email, passwword, confirmPassword, agree]);
+  
 
   return (
     <View style={commonStyle.container}>

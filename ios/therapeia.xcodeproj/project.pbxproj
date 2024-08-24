@@ -18,7 +18,7 @@
 		82DAB822C16895C43335A7A0 /* Pods_therapeia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6881A55A0F1C071EA45ADC2 /* Pods_therapeia.framework */; };
 		87F32B92D8C14D7392822FFA /* Poppins-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 92119557A0604768963DE1CB /* Poppins-BoldItalic.ttf */; };
 		A7C0838EC7514A4FADD4AA81 /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8E17D2F46BC64E99958CC76A /* Poppins-Light.ttf */; };
-		AC878BF62C78F0A6000F0CBD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AC878BF52C78F0A6000F0CBD /* GoogleService-Info.plist */; };
+		AC61BE572C7A27A400ADFE6C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AC61BE562C7A27A400ADFE6C /* GoogleService-Info.plist */; };
 		BAB9E69709994173AA2FBBA8 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AC2383E7852E41BD8789C08E /* Poppins-SemiBold.ttf */; };
 		D6C79D4E096440D1BDDC4E00 /* Poppins-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 95FFE16DF8664D3A9ACB6B95 /* Poppins-Black.ttf */; };
 		E63B4CC9839046F79B8D03BD /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 52B1BE68B39F4E3CAF7A3D5E /* Poppins-Bold.ttf */; };
@@ -58,7 +58,7 @@
 		92119557A0604768963DE1CB /* Poppins-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-BoldItalic.ttf"; path = "../assets/fonts/Poppins-BoldItalic.ttf"; sourceTree = "<group>"; };
 		95FFE16DF8664D3A9ACB6B95 /* Poppins-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Black.ttf"; path = "../assets/fonts/Poppins-Black.ttf"; sourceTree = "<group>"; };
 		AC2383E7852E41BD8789C08E /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-SemiBold.ttf"; path = "../assets/fonts/Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
-		AC878BF52C78F0A6000F0CBD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AC61BE562C7A27A400ADFE6C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B6881A55A0F1C071EA45ADC2 /* Pods_therapeia.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_therapeia.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAC370FB0B544AF68413C121 /* Poppins-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Thin.ttf"; path = "../assets/fonts/Poppins-Thin.ttf"; sourceTree = "<group>"; };
 		D97AC91A8F7B4D5DB35803C8 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Medium.ttf"; path = "../assets/fonts/Poppins-Medium.ttf"; sourceTree = "<group>"; };
@@ -106,7 +106,7 @@
 		13B07FAE1A68108700A75B9A /* therapeia */ = {
 			isa = PBXGroup;
 			children = (
-				AC878BF52C78F0A6000F0CBD /* GoogleService-Info.plist */,
+				AC61BE562C7A27A400ADFE6C /* GoogleService-Info.plist */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -286,7 +286,7 @@
 				D6C79D4E096440D1BDDC4E00 /* Poppins-Black.ttf in Resources */,
 				E63B4CC9839046F79B8D03BD /* Poppins-Bold.ttf in Resources */,
 				87F32B92D8C14D7392822FFA /* Poppins-BoldItalic.ttf in Resources */,
-				AC878BF62C78F0A6000F0CBD /* GoogleService-Info.plist in Resources */,
+				AC61BE572C7A27A400ADFE6C /* GoogleService-Info.plist in Resources */,
 				A7C0838EC7514A4FADD4AA81 /* Poppins-Light.ttf in Resources */,
 				46116A46DCD64B27BB7D5343 /* Poppins-Medium.ttf in Resources */,
 				0A123C7D9B684E79BA0EF9DC /* Poppins-Regular.ttf in Resources */,
@@ -566,7 +566,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.therapeia.app;
 				PRODUCT_NAME = therapeia;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -596,7 +596,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.therapeia.app;
 				PRODUCT_NAME = therapeia;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
