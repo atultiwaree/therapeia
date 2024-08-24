@@ -10,7 +10,8 @@ import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import {navigate} from '../../Navigation/RootNavigation';
 import firestore from '@react-native-firebase/firestore';
 import {validEmail} from '../../Utility';
-import auth, { firebase } from '@react-native-firebase/auth';
+import auth, {firebase} from '@react-native-firebase/auth';
+import {showMessage, hideMessage} from 'react-native-flash-message';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
@@ -19,17 +20,24 @@ const SignUp = () => {
   const [agree, setAgree] = useState(false);
 
   const handleSignUp = useCallback(async () => {
-    Alert.alert('fuck off');
+    // Alert.alert('fuck off');
 
     if (email.length === 0) {
-      Alert.alert('Please enter email ');
+      // Alert.alert('Please enter email ');
+
+      showMessage({
+        message: 'Please enter email',
+        type: 'info',
+      });
     } else {
       if (validEmail(email)) {
         if (passwword.length === 0 || confirmPassword.length === 0) {
-          Alert.alert('Please enter valid password and confirmpassword');
+          showMessage({
+            message: 'Please enter password and confirm password',
+            type: 'warning',
+          });
         } else {
           if (passwword === confirmPassword) {
-
             try {
               let x = await auth().createUserWithEmailAndPassword(
                 email,
@@ -39,9 +47,10 @@ const SignUp = () => {
               console.log(x);
 
               if (x.additionalUserInfo.isNewUser) {
-                Alert.alert('User created');
-
-                console.log("Xxx")
+                showMessage({
+                  message: 'Account created, please login',
+                  type: 'success',
+                });
 
                 setEmail('');
                 setPassword('');
@@ -49,28 +58,43 @@ const SignUp = () => {
                 navigate('Signin');
               }
             } catch (error) {
-
-
-              console.log(error)
+              console.log(error);
 
               if (error.code === 'auth/email-already-in-use') {
-                Alert.alert('That email address is already in use!');
+                // Alert.alert();
+
+                showMessage({
+                  message: 'That email address is already in use!',
+                  type: 'info',
+                });
               }
 
               if (error.code === 'auth/invalid-email') {
-                Alert.alert('That email address is invalid!');
+                showMessage({
+                  message: 'That email address is invalid!',
+                  type: 'danger',
+                });
               }
 
               if (error.code === 'auth/weak-password') {
-                Alert.alert('Please use strong password');
+                showMessage({
+                  message: 'Please use strong password',
+                  type: 'danger',
+                });
               }
             }
           } else {
-            Alert.alert('Password and ConfirmPassword did not matched');
+            showMessage({
+              message: 'Password and ConfirmPassword did not matched',
+              type: 'danger',
+            });
           }
         }
       } else {
-        Alert.alert('Please enter valid email address');
+        showMessage({
+          message: 'Please enter a valid email address',
+          type: 'danger',
+        });
       }
     }
   }, [email, passwword, confirmPassword]);

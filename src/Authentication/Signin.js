@@ -16,14 +16,12 @@ import {
   responsiveFontSize,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import {navigate} from '../../Navigation/RootNavigation';
-import firestore, { Filter } from '@react-native-firebase/firestore';
+
 import {validEmail} from '../../Utility';
 import auth from '@react-native-firebase/auth';
-import { useDispatch } from 'react-redux';
-import { addUser } from '../../redux/reducers/Auth';
-
-
+import {useDispatch} from 'react-redux';
+import {addUser} from '../../redux/reducers/Auth';
+import {showMessage, hideMessage} from 'react-native-flash-message';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
@@ -32,46 +30,55 @@ const SignIn = () => {
   const dispatch = useDispatch();
 
   const handleLogin = useCallback(async () => {
-
-
-
-
-    if (email !== '') {
-      if (password !== '') {
-        if (validEmail(email)) {
-
-
-
-          try {
-
-
-            let x = await auth().signInWithEmailAndPassword(email, password)
-
-            dispatch(addUser({
-              loggedIn : true,
-              email : x.user.email
-            }));
-
-            console.log(x)
-
-
-          } catch(e) {
-
-          }
-          
-          
-          
-            
-        } else {
-          Alert('Please enter a valid email');
-        }
-      } else {
-        Alert.alert('Please enter password');
-      }
-    } else {
-      Alert.alert('Please enter email');
+    // Check if email is provided
+    if (!email) {
+      showMessage({
+        message: 'Please enter email',
+        type: 'danger',
+      });
+      return; // Exit function early
     }
-  }, [email, password]);
+  
+    // Check if password is provided
+    if (!password) {
+      showMessage({
+        message: 'Please enter password',
+        type: 'warning',
+      });
+      return; // Exit function early
+    }
+  
+    // Check if email is valid
+    if (!validEmail(email)) {
+      showMessage({
+        message: 'Please enter a valid email',
+        type: 'danger',
+      });
+      return; // Exit function early
+    }
+  
+    try {
+      // Attempt to sign in with provided email and password
+      const result = await auth().signInWithEmailAndPassword(email, password);
+  
+      // Dispatch action with user details on successful login
+      dispatch(
+        addUser({
+          loggedIn: true,
+          email: result.user.email,
+        }),
+      );
+  
+      console.log(result);
+    } catch (error) {
+      // Handle any errors during sign-in
+      console.log(error);
+      showMessage({
+        message: 'Login failed. Please check your credentials.',
+        type: 'danger',
+      });
+    }
+  }, [email, password, dispatch]);
 
   return (
     <View style={commonStyle.container}>
