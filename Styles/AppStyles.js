@@ -1,4 +1,4 @@
-import {StyleSheet, View} from 'react-native';
+import {Platform, StyleSheet, View} from 'react-native';
 import {
   responsiveWidth,
   responsiveFontSize,
@@ -61,6 +61,7 @@ const commonStyle = StyleSheet.create({
     width: responsiveWidth(80),
     alignSelf: 'center',
     marginVertical: responsiveWidth(2),
+    padding : Platform.OS === "ios" ? responsiveWidth(4) : null
   },
   button: {
     padding: responsiveWidth(3),
@@ -71,6 +72,7 @@ const commonStyle = StyleSheet.create({
     fontFamily: 'Poppins-SemiBold',
     fontSize: commonSize.BTN_FONT_SIZE,
     color: commonColor.BLACK,
+    overflow: 'hidden',
   },
 });
 

@@ -10,7 +10,7 @@ import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import {navigate} from '../../Navigation/RootNavigation';
 import firestore from '@react-native-firebase/firestore';
 import {validEmail} from '../../Utility';
-import auth from '@react-native-firebase/auth';
+import auth, { firebase } from '@react-native-firebase/auth';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
@@ -19,53 +19,39 @@ const SignUp = () => {
   const [agree, setAgree] = useState(false);
 
   const handleSignUp = useCallback(async () => {
-    console.log(email, passwword, confirmPassword);
-
-    console.log(email);
-
-    console.log(validEmail(email));
-
-    console.log(email.length);
+    Alert.alert('fuck off');
 
     if (email.length === 0) {
       Alert.alert('Please enter email ');
     } else {
       if (validEmail(email)) {
-        console.log('XXX');
-
         if (passwword.length === 0 || confirmPassword.length === 0) {
           Alert.alert('Please enter valid password and confirmpassword');
         } else {
-          console.log('XXXX');
           if (passwword === confirmPassword) {
-            // firestore()
-            // .collection('Users')
-            // .add({
-            //   email,
-            //   passwword,
-            // })
-            // .then(() => {
-            //   console.log('User added!');
-            // });
-
 
             try {
-              let x = await auth().createUserWithEmailAndPassword(email, passwword);
+              let x = await auth().createUserWithEmailAndPassword(
+                email,
+                passwword,
+              );
 
-              
-              if(x.additionalUserInfo.isNewUser) {
-                Alert.alert("User created")
+              console.log(x);
 
-                setEmail("")
-                setPassword("")
-                setAgree(false)
-                navigate("Signin")
+              if (x.additionalUserInfo.isNewUser) {
+                Alert.alert('User created');
 
+                console.log("Xxx")
+
+                setEmail('');
+                setPassword('');
+                setAgree(false);
+                navigate('Signin');
               }
+            } catch (error) {
 
 
-
-            } catch(error) {
+              console.log(error)
 
               if (error.code === 'auth/email-already-in-use') {
                 Alert.alert('That email address is already in use!');
@@ -75,15 +61,10 @@ const SignUp = () => {
                 Alert.alert('That email address is invalid!');
               }
 
-
-              if(error.code === 'auth/weak-password') {
-                Alert.alert("Please use strong password")
+              if (error.code === 'auth/weak-password') {
+                Alert.alert('Please use strong password');
               }
-
             }
-
-
-
           } else {
             Alert.alert('Password and ConfirmPassword did not matched');
           }

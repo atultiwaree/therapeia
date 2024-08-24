@@ -1,28 +1,22 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React, {useCallback, useEffect, useState} from 'react';
-import  {commonColor} from '../Styles/AppStyles';
+import {commonColor} from '../Styles/AppStyles';
 import {GiftedChat, Bubble} from 'react-native-gifted-chat';
 import {useSendMessageMutation} from '../redux/apis';
 import LottieView from 'lottie-react-native';
 import {responsiveWidth} from 'react-native-responsive-dimensions';
 import Markdown from 'react-native-markdown-display';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
-
-const renderMessage = (props) => {
-  const { currentMessage } = props;
+const renderMessage = props => {
+  const {currentMessage} = props;
 
   return (
     <View style={styles.messageContainer}>
-      <Markdown
-        style={styles.markdown}
-      >
-        {currentMessage.text}
-      </Markdown>
+      <Markdown style={styles.markdown}>{currentMessage.text}</Markdown>
     </View>
   );
 };
-
-
 
 const ChatWindow = () => {
   const [messages, setMessages] = useState([]);
@@ -32,10 +26,14 @@ const ChatWindow = () => {
   const [loading, setLoading] = useState(false);
 
   const TypingComponent = ({loading}) => {
-
-    if(loading) {
+    if (loading) {
       return (
-        <View style = {{width : responsiveWidth(34), paddingLeft : responsiveWidth(14), marginBottom : responsiveWidth(4)}}>
+        <View
+          style={{
+            width: responsiveWidth(34),
+            paddingLeft: responsiveWidth(14),
+            marginBottom: responsiveWidth(4),
+          }}>
           <LottieView
             source={require('../assets/chat_load.json')}
             style={{height: responsiveWidth(10), width: responsiveWidth(15)}}
@@ -44,18 +42,15 @@ const ChatWindow = () => {
         </View>
       );
     } else {
-      return null
+      return null;
     }
-
-    
   };
 
-  
   useEffect(() => {
     setMessages([
       {
         _id: 1,
-        text: `Welcome to therapeia, How may I help you today?`,
+        text: `Welcome to therapeia, I'm ella your AI Therapist how can I help you today ?`,
         createdAt: new Date(),
         user: {
           _id: 2,
@@ -76,8 +71,6 @@ const ChatWindow = () => {
     const {data, error} = await sendMessage({
       body: {question: messages[0]?.text},
     });
-
-
 
     if (data?.success) {
       setLoading(false);
@@ -100,39 +93,36 @@ const ChatWindow = () => {
     }
   }, []);
 
-
   const renderBubble = props => {
     return (
       <Bubble
-      renderMessageText={renderMessage}
+        renderMessageText={renderMessage}
         {...props}
         wrapperStyle={{
           right: {
-            backgroundColor: "#fff",
-            paddingRight : responsiveWidth(3),
-            paddingLeft : responsiveWidth(2),
+            backgroundColor: '#cec7c1',
+            paddingRight: responsiveWidth(3),
+            paddingLeft: responsiveWidth(2),
           },
-          left : {
-            backgroundColor : "#FFE5D9",
-            paddingRight : responsiveWidth(3),
-            paddingLeft : responsiveWidth(2),
-            width : responsiveWidth(80)
-
-          }
+          left: {
+            backgroundColor: '#FFE5D9',
+            paddingRight: responsiveWidth(3),
+            paddingLeft: responsiveWidth(2),
+            width: responsiveWidth(80),
+          },
         }}
-
         textStyle={{
-          right : {
-            color : 'red',
-            fontFamily : 'Poppins-Medium'
-          }
+          right: {
+            color: 'red',
+            fontFamily: 'Poppins-Medium',
+          },
         }}
       />
     );
   };
 
   return (
-    <View style={{backgroundColor: commonColor.MAIN, flex: 1}}>
+    <SafeAreaView style={{backgroundColor: commonColor.MAIN, flex: 1}}>
       <GiftedChat
         messages={messages}
         onSend={messages => onSend(messages)}
@@ -143,16 +133,14 @@ const ChatWindow = () => {
         shouldUpdateMessage={() => {
           return true;
         }}
-        renderFooter={() =>   <TypingComponent loading = {loading}/>}
-        disableComposer = {loading}
+        renderFooter={() => <TypingComponent loading={loading} />}
+        disableComposer={loading}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 
 export default ChatWindow;
-
-
 
 const styles = StyleSheet.create({
   markdown: {
@@ -175,17 +163,16 @@ const styles = StyleSheet.create({
     listItem: {
       fontSize: 16,
     },
-    
 
     markdown: {
       // Set your desired font family
-      fontFamily : 'Poppins-Bold',
+      fontFamily: 'Poppins-Bold',
     },
     heading1: {
-      fontFamily : 'Poppins-Bold',
+      fontFamily: 'Poppins-Bold',
     },
     heading2: {
-      fontFamily : 'Poppins-Bold',
+      fontFamily: 'Poppins-Bold',
     },
 
     paragraph: {
@@ -198,7 +185,7 @@ const styles = StyleSheet.create({
       fontFamily: 'Poppins-Medium', // Set the font family for list items
     },
     text: {
-      fontFamily : 'Poppins-Medium',
+      fontFamily: 'Poppins-Medium',
     },
   },
 });
