@@ -1,5 +1,13 @@
-import {FlatList, Image, Pressable, StyleSheet, Text, View} from 'react-native';
-import React, {useCallback, useEffect} from 'react';
+import {
+  ActivityIndicator,
+  FlatList,
+  Image,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
+import React, {useCallback, useEffect, useState} from 'react';
 import commonStyle, {
   MarginVertical,
   commonColor,
@@ -17,8 +25,9 @@ import {useDispatch, useSelector} from 'react-redux';
 import {addUser} from '../../redux/reducers/Auth';
 import {useNavigation} from '@react-navigation/native';
 
-const EachBoxComponent = ({item, index}) => {
+const EachBoxComponent = ({item, index, loader, setLoader}) => {
   const dispatch = useDispatch();
+  const [localLoader, setLocalLoader] = useState(false); // Local loading state
 
   const handleEachPress = useCallback(async index => {
     if (index === 2) {
@@ -27,10 +36,16 @@ const EachBoxComponent = ({item, index}) => {
 
     if (index === 0) {
       console.log('Google signin');
+      setLocalLoader(true); // Show local loader
 
-      let userInformation = await authSystem.googleSignIn();
-
-      dispatch(addUser(userInformation));
+      try {
+        let userInformation = await authSystem.googleSignIn();
+        dispatch(addUser(userInformation));
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLocalLoader(false); // Hide local loader
+      }
     }
   }, []);
 
@@ -41,22 +56,30 @@ const EachBoxComponent = ({item, index}) => {
         {flexDirection: 'row', gap: responsiveWidth(4)},
         commonStyle.everyCenter,
       ]}
-      onPress={handleEachPress.bind(null, index)}>
-      <View style={styles.eachBoxImage}>
-        <Image
-          source={item.path}
-          resizeMethod="resize"
-          resizeMode="contain"
-          style={{width: '100%'}}
-        />
-      </View>
+      onPress={() => handleEachPress(index)}>
+      {localLoader ? (
+        <ActivityIndicator color={'#282828'} size={'small'} />
+      ) : (
+        <>
+          <View style={styles.eachBoxImage}>
+            <Image
+              source={item.path}
+              resizeMethod="resize"
+              resizeMode="contain"
+              style={{width: '100%'}}
+            />
+          </View>
 
-      <Text style={styles.eachBoxText}>{item.title}</Text>
+          <Text style={styles.eachBoxText}>{item.title}</Text>
+        </>
+      )}
     </Pressable>
   );
 };
 
 const Login = () => {
+  const [globalLoader, setGlobalLoader] = useState(false);
+
   return (
     <View style={[commonStyle.container, commonStyle.everyCenter]}>
       <View style={styles.box}>
@@ -77,7 +100,12 @@ const Login = () => {
 
         <FlatList
           data={logins}
-          renderItem={props => <EachBoxComponent {...props} />}
+          renderItem={props => (
+            <EachBoxComponent
+              {...props}
+              setLoader={setGlobalLoader} // No longer used, local loader manages itself
+            />
+          )}
           ItemSeparatorComponent={() => (
             <View style={{marginVertical: responsiveWidth(2)}} />
           )}
