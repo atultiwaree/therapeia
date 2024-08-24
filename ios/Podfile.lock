@@ -1438,6 +1438,8 @@ PODS:
   - React-jsinspector (0.72.15)
   - React-logger (0.72.15):
     - glog
+  - react-native-netinfo (11.3.2):
+    - React-Core
   - react-native-safe-area-context (4.10.8):
     - React-Core
   - react-native-splash-screen (3.3.0):
@@ -1608,6 +1610,7 @@ DEPENDENCIES:
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
+  - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-splash-screen (from `../node_modules/react-native-splash-screen`)
   - React-NativeModulesApple (from `../node_modules/react-native/ReactCommon/react/nativemodule/core/platform/ios`)
@@ -1711,6 +1714,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
   React-logger:
     :path: "../node_modules/react-native/ReactCommon/logger"
+  react-native-netinfo:
+    :path: "../node_modules/@react-native-community/netinfo"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
   react-native-splash-screen:
@@ -1815,6 +1820,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: d3eef5ddc78eeb9f0d02bed657a7f41d4910b966
   React-jsinspector: b86a8abae760c28d69366bbc1d991561e51341ed
   React-logger: ed7c9e01e58529065e7da6bf8318baf15024283e
+  react-native-netinfo: 076df4f9b07f6670acf4ce9a75aac8d34c2e2ccc
   react-native-safe-area-context: b7daa1a8df36095a032dff095a1ea8963cb48371
   react-native-splash-screen: 4312f786b13a81b5169ef346d76d33bc0c6dc457
   React-NativeModulesApple: a2c783eea2b9354534d6e991669d5051435b51db
