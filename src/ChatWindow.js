@@ -9,15 +9,45 @@ import Markdown from 'react-native-markdown-display';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { navigate } from '../Navigation/RootNavigation';
 import Modal from 'react-native-modal'; // Import react-native-modal
+import { useSelector } from 'react-redux';
+import { db } from '../firebaseConfig';
 
 
-const renderMessage = props => {
+const renderMessage = (props) => {
   const { currentMessage } = props;
 
   return (
     <View style={styles.messageContainer}>
       <Markdown style={styles.markdown}>{currentMessage.text}</Markdown>
     </View>
+  );
+};
+
+const renderBubble = (props) => {
+  return (
+    <Bubble
+      {...props}
+      renderMessageText={renderMessage}  // Attach renderMessage here
+      wrapperStyle={{
+        right: {
+          backgroundColor: '#cec7c1',
+          paddingRight: responsiveWidth(3),
+          paddingLeft: responsiveWidth(2),
+        },
+        left: {
+          backgroundColor: '#FFE5D9',
+          paddingRight: responsiveWidth(3),
+          paddingLeft: responsiveWidth(2),
+          width: responsiveWidth(80),
+        },
+      }}
+      textStyle={{
+        right: {
+          color: 'red',
+          fontFamily: 'Poppins-Medium',
+        },
+      }}
+    />
   );
 };
 
@@ -28,6 +58,8 @@ const ChatWindow = () => {
   const [messageCount, setMessageCount] = useState(0);
   const [showPopup, setShowPopup] = useState(false);
   const [popupShown, setPopupShown] = useState(false); // Flag to track if popup has been shown
+
+  const userEmail = useSelector(state => state.auth.profile.email);
 
   const TypingComponent = ({ loading }) => {
     if (loading) {
@@ -52,94 +84,119 @@ const ChatWindow = () => {
   };
 
   useEffect(() => {
-    setMessages([
-      {
-        _id: 1,
-        text: `Welcome to Therapeia, I'm Ella your AI Therapist. How can I help you today?`,
-        createdAt: new Date(),
-        user: {
-          _id: 2,
-          name: 'React Native',
-          avatar: 'https://picsum.photos/200',
-        },
-      },
-    ]);
-  }, []);
+    // Load messages from Firestore
+    const unsubscribe = db
+      .collection('chats')
+      .doc(userEmail)
+      .collection('messages')
+      .orderBy('createdAt', 'desc')
+      .onSnapshot(snapshot => {
+        const loadedMessages = snapshot.docs.map(doc => ({
+          _id: doc.id,
+          text: doc.data().text,
+          createdAt: doc.data().createdAt.toDate(),
+          user: doc.data().user,
+        }));
+        setMessages(loadedMessages);
 
-  const onSend = useCallback(async (messages = []) => {
+        // If there are no messages, set a default message
+        if (loadedMessages.length === 0) {
+          setMessages([{
+            _id: 1,
+            text: 'Welcome! How can I assist you today?',
+            createdAt: new Date(),
+            user: {
+              _id: 2,
+              name: 'Ella',
+              avatar: 'https://picsum.photos/200',
+            },
+          }]);
+        }
+      });
+
+    return () => unsubscribe();
+  }, [userEmail]);
+
+
+  const onSend = useCallback(async (newMessages = []) => {
     if (popupShown) {
-      // If popup has already been shown, only show the modal
       setShowPopup(true);
       return;
     }
-
+  
+    const messageToSend = newMessages[0]; // Only sending one message at a time
+  
+    // Ensure the message has a unique ID using Date.now()
+    messageToSend._id = Date.now();
+  
+    // Append the new user message to the chat UI
     setMessages(previousMessages =>
-      GiftedChat.append(previousMessages, messages),
+      GiftedChat.append(previousMessages, newMessages),
     );
-
+  
+    // Save user's message to Firestore
+    await saveMessageToFirestore(messageToSend);
+  
     setMessageCount(prevCount => {
       const newCount = prevCount + 1;
-      if (newCount % 2 === 0) { // Trigger the popup every 2 messages
-        setShowPopup(true);
+      if (newCount % 10 === 0) {
+        setShowPopup(true); // Show popup every 2 messages
       }
       return newCount;
     });
-
+  
     setLoading(true);
-
+  
     const { data, error } = await sendMessage({
-      body: { question: messages[0]?.text },
+      body: { question: messageToSend?.text },
     });
-
+  
     if (data?.success) {
       setLoading(false);
+      const responseMessage = {
+        _id: Date.now() + 1, // Ensure unique ID for bot response
+        text: data?.message,
+        createdAt: new Date(),
+        user: {
+          _id: 2,
+          name: 'Ella',
+          avatar: 'https://picsum.photos/200',
+        },
+      };
+  
+      // Append the bot's response to the chat UI
       setMessages(previousMessages =>
-        GiftedChat.append(previousMessages, {
-          _id: previousMessages.length + 1,
-          text: data?.message,
-          createdAt: new Date(),
-          user: {
-            _id: 2,
-            name: 'React Native',
-            avatar: 'https://picsum.photos/200',
-          },
-        }),
+        GiftedChat.append(previousMessages, responseMessage),
       );
+  
+      // Save the bot's response to Firestore
+      await saveMessageToFirestore(responseMessage);
     }
-
+  
     if (error) {
       console.log(error.message);
+      setLoading(false);
     }
   }, [popupShown]);
+  
 
-  const renderBubble = props => {
-    return (
-      <Bubble
-        renderMessageText={renderMessage}
-        {...props}
-        wrapperStyle={{
-          right: {
-            backgroundColor: '#cec7c1',
-            paddingRight: responsiveWidth(3),
-            paddingLeft: responsiveWidth(2),
-          },
-          left: {
-            backgroundColor: '#FFE5D9',
-            paddingRight: responsiveWidth(3),
-            paddingLeft: responsiveWidth(2),
-            width: responsiveWidth(80),
-          },
-        }}
-        textStyle={{
-          right: {
-            color: 'red',
-            fontFamily: 'Poppins-Medium',
-          },
-        }}
-      />
-    );
+  const saveMessageToFirestore = async message => {
+    try {
+      await db
+        .collection('chats')
+        .doc(userEmail) // Use user email to uniquely identify chat
+        .collection('messages')
+        .doc(message._id.toString())
+        .set({
+          _id: message._id,
+          text: message.text,
+          createdAt: message.createdAt,
+          user: message.user,
+        });
+    } catch (error) {
+      console.error('Error saving message to Firestore:', error);
+    }
   };
-
   return (
     <SafeAreaView style={{ backgroundColor: commonColor.MAIN, flex: 1 }}>
       <GiftedChat

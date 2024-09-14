@@ -22,9 +22,6 @@ const authSlice = createSlice({
 
     setEmail : (state, action) => {
       state.profile.email = action.payload.email
-
-      console.log("u**************************",action.payload.email , "::::::")
-
     },
 
     resetUser: (state, action) => {
