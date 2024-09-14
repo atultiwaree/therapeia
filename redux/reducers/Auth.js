@@ -2,7 +2,8 @@ import {createSlice} from '@reduxjs/toolkit';
 const initialState = {
   profile: {
     privacyPolicyStatus: false,
-    loggedIn : false
+    loggedIn : false,
+    email : undefined
   },
 };
 
@@ -12,10 +13,18 @@ const authSlice = createSlice({
   reducers: {
     addUser: (state, action) => {
       state.profile = {...action.payload};
+      state.profile.email = action.payload.email
     },
 
     setPrivacyPolicy: (state, action) => {
       state.profile.privacyPolicyStatus = action.payload.status;
+    },
+
+    setEmail : (state, action) => {
+      state.profile.email = action.payload.email
+
+      console.log("u**************************",action.payload.email , "::::::")
+
     },
 
     resetUser: (state, action) => {
@@ -24,5 +33,5 @@ const authSlice = createSlice({
   },
 });
 
-export const {addUser, updateUser, resetUser, setPrivacyPolicy} = authSlice.actions;
+export const {addUser, updateUser, resetUser, setPrivacyPolicy, setEmail} = authSlice.actions;
 export default authSlice.reducer;

@@ -68,7 +68,8 @@ const SignIn = () => {
           email: result.user.email,
         }),
       );
-  
+      
+
       console.log(result);
     } catch (error) {
       // Handle any errors during sign-in

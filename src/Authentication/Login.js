@@ -22,7 +22,7 @@ import {navigate} from '../../Navigation/RootNavigation';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import authSystem from '../../OAuth';
 import {useDispatch, useSelector} from 'react-redux';
-import {addUser} from '../../redux/reducers/Auth';
+import {addUser, setEmail} from '../../redux/reducers/Auth';
 import {useNavigation} from '@react-navigation/native';
 
 const EachBoxComponent = ({item, index, loader, setLoader}) => {
@@ -41,6 +41,9 @@ const EachBoxComponent = ({item, index, loader, setLoader}) => {
       try {
         let userInformation = await authSystem.googleSignIn();
         dispatch(addUser(userInformation));
+        dispatch(setEmail({email : userInformation.email}))
+
+        
       } catch (error) {
         console.error(error);
       } finally {

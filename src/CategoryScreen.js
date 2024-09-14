@@ -51,7 +51,7 @@ const CategoryScreen = () => {
           resizeMethod="resize"
           resizeMode="contain"
           style={{
-            width: '70%',
+            width: '45%',
             height: responsiveWidth(20),
           }}
         />
