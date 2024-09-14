@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, Modal, Button} from 'react-native';
 import React, {useCallback, useEffect, useState} from 'react';
 import {commonColor} from '../Styles/AppStyles';
 import {GiftedChat, Bubble} from 'react-native-gifted-chat';
@@ -7,6 +7,7 @@ import LottieView from 'lottie-react-native';
 import {responsiveWidth} from 'react-native-responsive-dimensions';
 import Markdown from 'react-native-markdown-display';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import { navigate } from '../Navigation/RootNavigation';
 
 const renderMessage = props => {
   const {currentMessage} = props;
@@ -20,10 +21,11 @@ const renderMessage = props => {
 
 const ChatWindow = () => {
   const [messages, setMessages] = useState([]);
-
   const [sendMessage] = useSendMessageMutation();
-
   const [loading, setLoading] = useState(false);
+  const [messageCount, setMessageCount] = useState(0);
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupShown, setPopupShown] = useState(false); // Flag to track if popup has been shown
 
   const TypingComponent = ({loading}) => {
     if (loading) {
@@ -50,7 +52,7 @@ const ChatWindow = () => {
     setMessages([
       {
         _id: 1,
-        text: `Welcome to therapeia, I'm ella your AI Therapist how can I help you today ?`,
+        text: `Welcome to Therapeia, I'm Ella your AI Therapist. How can I help you today?`,
         createdAt: new Date(),
         user: {
           _id: 2,
@@ -62,9 +64,23 @@ const ChatWindow = () => {
   }, []);
 
   const onSend = useCallback(async (messages = []) => {
+    if (popupShown) {
+      // If popup has already been shown, only show the modal
+      setShowPopup(true);
+      return;
+    }
+
     setMessages(previousMessages =>
       GiftedChat.append(previousMessages, messages),
     );
+
+    setMessageCount(prevCount => {
+      const newCount = prevCount + 1;
+      if (newCount % 2 === 0) { // Trigger the popup every 2 messages
+        setShowPopup(true);
+      }
+      return newCount;
+    });
 
     setLoading(true);
 
@@ -91,7 +107,7 @@ const ChatWindow = () => {
     if (error) {
       console.log(error.message);
     }
-  }, []);
+  }, [popupShown]);
 
   const renderBubble = props => {
     return (
@@ -136,11 +152,43 @@ const ChatWindow = () => {
         renderFooter={() => <TypingComponent loading={loading} />}
         disableComposer={loading}
       />
+
+      {/* Popup Modal */}
+      <Modal
+        transparent={true}
+        animationType="slide"
+        visible={showPopup}
+        onRequestClose={() => {
+          setShowPopup(false);
+          setPopupShown(true); // Mark the popup as shown
+        }}
+      >
+        <View style={styles.popupContainer}>
+          <View style={styles.popupContent}>
+            <Text style={styles.popupTitle}>
+              Attention Required
+            </Text>
+            <Text style={styles.popupText}>
+              It looks like you've been chatting a lot. If you need professional help, consider connecting with a real mental therapist.
+            </Text>
+            <View style={styles.buttonContainer}>
+              <Button title="Connect with a Therapist" onPress={() => {
+                // Handle connection to a real therapist here
+                setShowPopup(false);
+                navigate("realtherapist")
+                setPopupShown(true); // Mark the popup as shown
+              }} style={styles.button} />
+              <Button title="Dismiss" onPress={() => {
+                setShowPopup(false);
+                setPopupShown(true); // Mark the popup as shown
+              }} style={styles.button} />
+            </View>
+          </View>
+        </View>
+      </Modal>
     </SafeAreaView>
   );
 };
-
-export default ChatWindow;
 
 const styles = StyleSheet.create({
   markdown: {
@@ -163,29 +211,50 @@ const styles = StyleSheet.create({
     listItem: {
       fontSize: 16,
     },
-
-    markdown: {
-      // Set your desired font family
-      fontFamily: 'Poppins-Bold',
-    },
-    heading1: {
-      fontFamily: 'Poppins-Bold',
-    },
-    heading2: {
-      fontFamily: 'Poppins-Bold',
-    },
-
-    paragraph: {
-      fontFamily: 'Poppins-Regular', // Set the font family for normal text
-    },
-    list: {
-      fontFamily: 'Poppins-SemiBold', // Set the font family for list items
-    },
-    listItem: {
-      fontFamily: 'Poppins-Medium', // Set the font family for list items
-    },
     text: {
       fontFamily: 'Poppins-Medium',
     },
   },
+  popupContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.6)', // Slightly darker background for better contrast
+  },
+  popupContent: {
+    width: '90%', // Adjusted width
+    maxWidth: 400, // Maximum width for larger screens
+    backgroundColor: '#ffffff',
+    padding: 20,
+    borderRadius: 15, // Rounded corners
+    elevation: 10, // Shadow for Android
+    shadowColor: '#000', // Shadow for iOS
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    alignItems: 'center',
+  },
+  popupTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    color: '#333', // Darker color for better readability
+  },
+  popupText: {
+    fontSize: 16,
+    color: '#555', // Slightly lighter color for text
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+  },
+  button: {
+    flex: 1,
+    marginHorizontal: 5,
+  },
 });
+
+export default ChatWindow;
