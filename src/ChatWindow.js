@@ -1,16 +1,18 @@
-import {StyleSheet, Text, View, Modal, Button} from 'react-native';
-import React, {useCallback, useEffect, useState} from 'react';
-import {commonColor} from '../Styles/AppStyles';
-import {GiftedChat, Bubble} from 'react-native-gifted-chat';
-import {useSendMessageMutation} from '../redux/apis';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import React, { useCallback, useEffect, useState } from 'react';
+import { commonColor, commonSize } from '../Styles/AppStyles';
+import { GiftedChat, Bubble } from 'react-native-gifted-chat';
+import { useSendMessageMutation } from '../redux/apis';
 import LottieView from 'lottie-react-native';
-import {responsiveWidth} from 'react-native-responsive-dimensions';
+import { responsiveWidth } from 'react-native-responsive-dimensions';
 import Markdown from 'react-native-markdown-display';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { navigate } from '../Navigation/RootNavigation';
+import Modal from 'react-native-modal'; // Import react-native-modal
+
 
 const renderMessage = props => {
-  const {currentMessage} = props;
+  const { currentMessage } = props;
 
   return (
     <View style={styles.messageContainer}>
@@ -27,7 +29,7 @@ const ChatWindow = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [popupShown, setPopupShown] = useState(false); // Flag to track if popup has been shown
 
-  const TypingComponent = ({loading}) => {
+  const TypingComponent = ({ loading }) => {
     if (loading) {
       return (
         <View
@@ -35,10 +37,11 @@ const ChatWindow = () => {
             width: responsiveWidth(34),
             paddingLeft: responsiveWidth(14),
             marginBottom: responsiveWidth(4),
-          }}>
+          }}
+        >
           <LottieView
             source={require('../assets/chat_load.json')}
-            style={{height: responsiveWidth(10), width: responsiveWidth(15)}}
+            style={{ height: responsiveWidth(10), width: responsiveWidth(15) }}
             autoPlay
           />
         </View>
@@ -84,8 +87,8 @@ const ChatWindow = () => {
 
     setLoading(true);
 
-    const {data, error} = await sendMessage({
-      body: {question: messages[0]?.text},
+    const { data, error } = await sendMessage({
+      body: { question: messages[0]?.text },
     });
 
     if (data?.success) {
@@ -138,7 +141,7 @@ const ChatWindow = () => {
   };
 
   return (
-    <SafeAreaView style={{backgroundColor: commonColor.MAIN, flex: 1}}>
+    <SafeAreaView style={{ backgroundColor: commonColor.MAIN, flex: 1 }}>
       <GiftedChat
         messages={messages}
         onSend={messages => onSend(messages)}
@@ -146,42 +149,51 @@ const ChatWindow = () => {
           _id: 1,
         }}
         renderBubble={renderBubble}
-        shouldUpdateMessage={() => {
-          return true;
-        }}
+        shouldUpdateMessage={() => true}
         renderFooter={() => <TypingComponent loading={loading} />}
         disableComposer={loading}
       />
 
       {/* Popup Modal */}
       <Modal
-        transparent={true}
-        animationType="slide"
-        visible={showPopup}
-        onRequestClose={() => {
+        isVisible={showPopup}
+        onBackdropPress={() => {
           setShowPopup(false);
           setPopupShown(true); // Mark the popup as shown
         }}
+        style={styles.modal}
+        animationIn="slideInUp" // Modal slides in from the bottom
+        animationOut="slideOutDown" // Modal slides out to the bottom
+        backdropOpacity={0.6}
+        swipeDirection="down" // Allow swipe down to close
       >
         <View style={styles.popupContainer}>
           <View style={styles.popupContent}>
-            <Text style={styles.popupTitle}>
-              Attention Required
-            </Text>
+            <Text style={styles.popupTitle}>Attention Required</Text>
             <Text style={styles.popupText}>
               It looks like you've been chatting a lot. If you need professional help, consider connecting with a real mental therapist.
             </Text>
             <View style={styles.buttonContainer}>
-              <Button title="Connect with a Therapist" onPress={() => {
-                // Handle connection to a real therapist here
-                setShowPopup(false);
-                navigate("realtherapist")
-                setPopupShown(true); // Mark the popup as shown
-              }} style={styles.button} />
-              <Button title="Dismiss" onPress={() => {
-                setShowPopup(false);
-                setPopupShown(true); // Mark the popup as shown
-              }} style={styles.button} />
+              <TouchableOpacity
+                onPress={() => {
+                  // Handle connection to a real therapist here
+                  setShowPopup(false);
+                  navigate("realtherapist");
+                  setPopupShown(true); // Mark the popup as shown
+                }}
+                style={styles.button}
+              >
+                <Text style={styles.buttonText}>Connect with a Therapist</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  setShowPopup(false);
+                  setPopupShown(true); // Mark the popup as shown
+                }}
+                style={[styles.button, styles.dismissButton]} // Add custom style for dismiss button
+              >
+                <Text style={styles.buttonText}>Dismiss</Text>
+              </TouchableOpacity>
             </View>
           </View>
         </View>
@@ -217,18 +229,16 @@ const styles = StyleSheet.create({
   },
   popupContainer: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
     alignItems: 'center',
-    backgroundColor: 'rgba(0,0,0,0.6)', // Slightly darker background for better contrast
   },
   popupContent: {
-    width: '90%', // Adjusted width
-    maxWidth: 400, // Maximum width for larger screens
+    width: '100%', // Full width
     backgroundColor: '#ffffff',
     padding: 20,
-    borderRadius: 15, // Rounded corners
-    elevation: 10, // Shadow for Android
-    shadowColor: '#000', // Shadow for iOS
+    borderRadius: 15,
+    elevation: 10,
+    shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 5,
@@ -238,22 +248,38 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 10,
-    color: '#333', // Darker color for better readability
+    color: '#333',
   },
   popupText: {
     fontSize: 16,
-    color: '#555', // Slightly lighter color for text
+    color: '#555',
     marginBottom: 20,
     textAlign: 'center',
   },
   buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
     width: '100%',
+    alignItems: 'center',
   },
   button: {
-    flex: 1,
-    marginHorizontal: 5,
+    borderColor: commonColor.LIGHT_BORDER,
+    borderWidth: commonSize.BORDER_WIDTH,
+    borderRadius: commonSize.BORDER_RADIUS,
+    width: responsiveWidth(80),
+    padding: responsiveWidth(3),
+    backgroundColor: '#282828',
+    alignItems: 'center',
+  },
+
+  dismissButton: {
+    marginTop: responsiveWidth(16),
+  },
+  buttonText: {
+    color: '#ffffff',
+    fontSize: 16,
+  },
+  modal: {
+    justifyContent: 'flex-end',
+    margin: 0,
   },
 });
 
