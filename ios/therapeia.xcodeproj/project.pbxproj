@@ -19,7 +19,9 @@
 		87F32B92D8C14D7392822FFA /* Poppins-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 92119557A0604768963DE1CB /* Poppins-BoldItalic.ttf */; };
 		A7C0838EC7514A4FADD4AA81 /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8E17D2F46BC64E99958CC76A /* Poppins-Light.ttf */; };
 		AC61BE572C7A27A400ADFE6C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AC61BE562C7A27A400ADFE6C /* GoogleService-Info.plist */; };
+		B9FCCA516BD04602A458FD17 /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8AE6F9A8C4A4F08ACBA6BC3 /* BootSplash.storyboard */; };
 		BAB9E69709994173AA2FBBA8 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AC2383E7852E41BD8789C08E /* Poppins-SemiBold.ttf */; };
+		C173B56E63B6453C9914AA48 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30E803873EE04B8FAFC4FEF3 /* Colors.xcassets */; };
 		D6C79D4E096440D1BDDC4E00 /* Poppins-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 95FFE16DF8664D3A9ACB6B95 /* Poppins-Black.ttf */; };
 		E63B4CC9839046F79B8D03BD /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 52B1BE68B39F4E3CAF7A3D5E /* Poppins-Bold.ttf */; };
 		E956CB33A6D746D3BD483768 /* Poppins-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CAC370FB0B544AF68413C121 /* Poppins-Thin.ttf */; };
@@ -46,6 +48,7 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = therapeia/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = therapeia/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = therapeia/main.m; sourceTree = "<group>"; };
+		30E803873EE04B8FAFC4FEF3 /* Colors.xcassets */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = folder.assetcatalog; name = Colors.xcassets; path = therapeia/Colors.xcassets; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-therapeia.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-therapeia.debug.xcconfig"; path = "Target Support Files/Pods-therapeia/Pods-therapeia.debug.xcconfig"; sourceTree = "<group>"; };
 		52B1BE68B39F4E3CAF7A3D5E /* Poppins-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Bold.ttf"; path = "../assets/fonts/Poppins-Bold.ttf"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-therapeia.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-therapeia.release.xcconfig"; path = "Target Support Files/Pods-therapeia/Pods-therapeia.release.xcconfig"; sourceTree = "<group>"; };
@@ -63,6 +66,7 @@
 		CAC370FB0B544AF68413C121 /* Poppins-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Thin.ttf"; path = "../assets/fonts/Poppins-Thin.ttf"; sourceTree = "<group>"; };
 		D97AC91A8F7B4D5DB35803C8 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Medium.ttf"; path = "../assets/fonts/Poppins-Medium.ttf"; sourceTree = "<group>"; };
 		E219164151E0498596D3A9BC /* Poppins-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Regular.ttf"; path = "../assets/fonts/Poppins-Regular.ttf"; sourceTree = "<group>"; };
+		E8AE6F9A8C4A4F08ACBA6BC3 /* BootSplash.storyboard */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = BootSplash.storyboard; path = therapeia/BootSplash.storyboard; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -114,6 +118,8 @@
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
 				7E08D78FA6394B30A285BCDC /* PrivacyInfo.xcprivacy */,
+				E8AE6F9A8C4A4F08ACBA6BC3 /* BootSplash.storyboard */,
+				30E803873EE04B8FAFC4FEF3 /* Colors.xcassets */,
 			);
 			name = therapeia;
 			sourceTree = "<group>";
@@ -293,6 +299,8 @@
 				BAB9E69709994173AA2FBBA8 /* Poppins-SemiBold.ttf in Resources */,
 				E956CB33A6D746D3BD483768 /* Poppins-Thin.ttf in Resources */,
 				F2A90BC13EFFA5C6885E3446 /* PrivacyInfo.xcprivacy in Resources */,
+				B9FCCA516BD04602A458FD17 /* BootSplash.storyboard in Resources */,
+				C173B56E63B6453C9914AA48 /* Colors.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -550,7 +558,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 59X6F8Y2M4;
+				DEVELOPMENT_TEAM = Z8TXT293Y3;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = therapeia/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Therapeia;
@@ -566,7 +574,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.therapeia.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.therapeia.apps;
 				PRODUCT_NAME = therapeia;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -581,7 +589,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 59X6F8Y2M4;
+				DEVELOPMENT_TEAM = Z8TXT293Y3;
 				INFOPLIST_FILE = therapeia/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Therapeia;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
@@ -596,7 +604,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.therapeia.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.therapeia.apps;
 				PRODUCT_NAME = therapeia;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";

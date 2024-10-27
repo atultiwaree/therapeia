@@ -1,6 +1,5 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React, {useEffect} from 'react';
-import SplashScreen from 'react-native-splash-screen';
 import {NavigationContainer} from '@react-navigation/native';
 import Main from './Main';
 import {navigationRef} from './Navigation/RootNavigation';
@@ -11,6 +10,7 @@ import store from './redux/store';
 import NetworkStatusOverlay from './NetworkStatusOverlay';
 import { NetworkProvider } from './NetworkContext';
 const persistor = persistStore(store);
+import BootSplash from 'react-native-bootsplash';
 
 
 
@@ -18,7 +18,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor}>
-        <NavigationContainer ref={navigationRef}>
+        <NavigationContainer ref={navigationRef} onReady={() => BootSplash.hide({fade: true})}>
         <NetworkProvider>
 
           <Main />

@@ -22,6 +22,7 @@ import ChatWindow from '../src/ChatWindow';
 import SingleAfterCategory from '../src/SingleAfterCategory';
 import Maps from '../src/SubCategories/ActionScreen/Map';
 import Question from '../src/dummy/Question';
+import SelfRating from '../src/Components/SelfRating';
 const Stack = createNativeStackNavigator();
 
 const StackNavigation = () => {
@@ -99,6 +100,15 @@ const StackNavigation = () => {
               />
 
               <Stack.Screen
+                name="selfrating"
+                component={SelfRating}
+                options={{
+                  title: '',
+                  headerShadowVisible: false,
+                }}
+              />
+
+              <Stack.Screen
                 name="whatWorks"
                 component={WhatWorks}
                 options={{
@@ -134,7 +144,7 @@ const StackNavigation = () => {
                 }}
               />
 
-             <Stack.Screen
+              <Stack.Screen
                 name="map"
                 component={Maps}
                 options={{
@@ -142,7 +152,6 @@ const StackNavigation = () => {
                   headerShadowVisible: false,
                 }}
               />
-
 
               <Stack.Screen
                 name="singleAfterCategory"
@@ -153,7 +162,7 @@ const StackNavigation = () => {
                 }}
               />
 
-            <Stack.Screen
+              <Stack.Screen
                 name="question"
                 component={Question}
                 options={{

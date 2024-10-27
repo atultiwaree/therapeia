@@ -8,6 +8,8 @@ import {
 import {counsellingData} from '../../assets/data';
 import { navigate } from '../../Navigation/RootNavigation';
 
+
+
 const Counselling = ({route}) => {
 
 
@@ -25,7 +27,9 @@ const Counselling = ({route}) => {
             backgroundColor: commonColor.BLACK,
           },
         ]}
-        onPress={() => navigate("whatWorks", {category : route?.params?.category, moodState : item.title})}
+        // onPress={() => navigate("whatWorks", )}
+
+        onPress={() => navigate("selfrating", {category : route?.params?.category, moodState : item.title})}
      >
 
         <Text
