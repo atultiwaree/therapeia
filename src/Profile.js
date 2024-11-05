@@ -1,6 +1,6 @@
 import {StyleSheet, Text, View, Button, Image} from 'react-native';
 import React from 'react';
-import commonStyle, {MarginVertical} from '../Styles/AppStyles';
+import commonStyle, {commonColor, MarginVertical} from '../Styles/AppStyles';
 import authSystem from '../OAuth';
 import {useSelector} from 'react-redux';
 
@@ -54,6 +54,6 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     overflow: 'hidden',
     // borderWidth: 1,
-    backgroundColor: '#fff',
+    backgroundColor: commonColor.BACKGROUND_GREY
   },
 });

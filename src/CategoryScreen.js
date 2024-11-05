@@ -18,8 +18,13 @@ import {navigate} from '../Navigation/RootNavigation';
 
 const CategoryScreen = () => {
   const handleEachCategory = index => {
+    
     if (index === 0) {
       navigate('counselling');
+    }
+
+    if(index === 1) {
+      navigate("plans")
     }
 
     if( index === 2 ) {
@@ -33,7 +38,6 @@ const CategoryScreen = () => {
     if(index === 4) {
       navigate("singleAfterCategory", { category : "meditation" })
     }
-
 
     if(index === 7) {
       navigate("singleAfterCategory", { category : "therapist" })
@@ -51,7 +55,7 @@ const CategoryScreen = () => {
           resizeMethod="resize"
           resizeMode="contain"
           style={{
-            width: '45%',
+            width: '35%',
             height: responsiveWidth(20),
           }}
         />
@@ -61,7 +65,7 @@ const CategoryScreen = () => {
             commonStyle.boldTitle,
             {
               fontFamily: 'Poppins-SemiBold',
-              fontSize: responsiveFontSize(2.0),
+              fontSize: responsiveFontSize(1.8),
               marginTop: responsiveWidth(2),
             },
           ]}>
@@ -93,8 +97,8 @@ export default CategoryScreen;
 
 const styles = StyleSheet.create({
   box: {
-    height: responsiveWidth(33),
-    width: responsiveWidth(33),
+    height: responsiveWidth(30),
+    width: responsiveWidth(30),
     padding: responsiveWidth(2),
     ...commonStyle.everyCenter,
     backgroundColor: commonColor.BACKGROUND_GREY,

@@ -8,14 +8,14 @@ export const commonColor = {
   MAIN: '#F1EFE7',
   BLACK: '#282828',
   LIGHT_BORDER: '#AFABAB',
-  BACKGROUND_GREY: '#d0cece',
+  BACKGROUND_GREY: '#e7e9f1',
   WHITE : "#fff"
 };
 
 export const commonSize = {
   BORDER_WIDTH: responsiveWidth(0.8),
   BORDER_RADIUS: responsiveWidth(2),
-  BTN_FONT_SIZE: responsiveFontSize(2.3),
+  BTN_FONT_SIZE: responsiveFontSize(2.1),
 };
 
 export const MarginVertical = ({size}) => {
@@ -65,7 +65,7 @@ const commonStyle = StyleSheet.create({
   },
   button: {
     padding: responsiveWidth(3),
-    backgroundColor: '#d0cece',
+    backgroundColor: commonColor.BACKGROUND_GREY,
     borderRadius: commonSize.BORDER_RADIUS,
     marginTop: responsiveWidth(8),
     textAlign: 'center',
@@ -73,6 +73,7 @@ const commonStyle = StyleSheet.create({
     fontSize: commonSize.BTN_FONT_SIZE,
     color: commonColor.BLACK,
     overflow: 'hidden',
+    fontSize : responsiveFontSize(2.1)
   },
 });
 

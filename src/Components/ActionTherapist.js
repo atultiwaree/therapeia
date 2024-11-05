@@ -17,6 +17,10 @@ const ActionTherapist = ({heading, title, path, type}) => {
       if(type === "real") {
         navigate("question")
       }
+
+      if(type === "AIWindow") {
+        navigate("chatwindow")
+      }
     }} style={styles.box}>
       <Image
         source={path}

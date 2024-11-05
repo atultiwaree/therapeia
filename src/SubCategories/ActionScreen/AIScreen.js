@@ -24,19 +24,10 @@ const AIScreen = () => {
           heading={'Ella'}
           title={'Your AI Therapist'}
           path={require('../../../assets/images/girl.jpeg')}
+          type = {"AIWindow"}
         />
       </View>
 
-      <TouchableOpacity onPress={() => navigate('chatwindow')}>
-        <Text
-          style={[
-            commonStyle.boldTitle,
-            
-            {fontFamily: 'Poppins-Medium', marginTop: responsiveWidth(2),},
-          ]}>
-          Go to chats
-        </Text>
-      </TouchableOpacity>
     </View>
   );
 };

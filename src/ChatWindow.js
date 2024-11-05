@@ -8,7 +8,7 @@ import { responsiveWidth } from 'react-native-responsive-dimensions';
 import Markdown from 'react-native-markdown-display';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { navigate } from '../Navigation/RootNavigation';
-import Modal from 'react-native-modal'; // Import react-native-modal
+import Modal from 'react-native-modal'; 
 import { useSelector } from 'react-redux';
 import { db } from '../firebaseConfig';
 
@@ -184,7 +184,7 @@ const ChatWindow = () => {
     try {
       await db
         .collection('chats')
-        .doc(userEmail) // Use user email to uniquely identify chat
+        .doc(userEmail) 
         .collection('messages')
         .doc(message._id.toString())
         .set({

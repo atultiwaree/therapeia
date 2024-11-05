@@ -28,11 +28,11 @@ const PrivacyPolicy = () => {
         </View>
 
         <Text
-          style={[commonStyle.boldTitle, {marginVertical: responsiveWidth(8)}]}>
+          style={[commonStyle.boldTitle, {marginVertical: responsiveWidth(8), fontSize : responsiveFontSize(2)}]}>
           We value your Privacy
         </Text>
 
-        <Text style={[commonStyle.boldTitle, {fontFamily: 'Poppins-Medium'}]}>
+        <Text style={[commonStyle.boldTitle, {fontFamily: 'Poppins-Medium', fontSize : responsiveFontSize(1.8)}]}>
           We will not sell, distribute, or lease your Personal information to
           any third parties unless you consent, or unless such disclosure or use
           is required by law.
@@ -53,7 +53,7 @@ export default PrivacyPolicy;
 const styles = StyleSheet.create({
   imageContainer: {
     alignSelf: 'center',
-    width: responsiveWidth(30),
+    width: responsiveWidth(20),
   },
   box: {
     width: '100%',

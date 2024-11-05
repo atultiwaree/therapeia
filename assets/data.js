@@ -124,7 +124,7 @@ export const treatmentType = [
   {
     id: 3,
     title: 'Your AI Therapist',
-    path: require('./images/dollar.png'),
+    path: require('./images/ai.png'),
   },
 ];
 
@@ -134,10 +134,10 @@ export const intervationData = [
     title: 'Resources: Meditation/Activities etc.',
   },
 
-  {
-    id: 2,
-    title: 'Choose your Therapist',
-  },
+  // {
+  //   id: 2,
+  //   title: 'Choose your Therapist',
+  // },
 ];
 
 export const anxietyData = [

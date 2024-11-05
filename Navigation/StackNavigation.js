@@ -23,6 +23,8 @@ import SingleAfterCategory from '../src/SingleAfterCategory';
 import Maps from '../src/SubCategories/ActionScreen/Map';
 import Question from '../src/dummy/Question';
 import SelfRating from '../src/Components/SelfRating';
+import Plans from '../src/Plans';
+import Edit from './Edit';
 const Stack = createNativeStackNavigator();
 
 const StackNavigation = () => {
@@ -105,6 +107,18 @@ const StackNavigation = () => {
                 options={{
                   title: '',
                   headerShadowVisible: false,
+                  
+                }}
+              
+              />
+
+              <Stack.Screen
+                name="plans"
+                component={Plans}
+                options={{
+                  title: '',
+                  headerShadowVisible: false,
+                  headerRight : () => <Edit/>
                 }}
               />
 
