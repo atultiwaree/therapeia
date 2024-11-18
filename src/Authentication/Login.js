@@ -24,6 +24,7 @@ import authSystem from '../../OAuth';
 import {useDispatch, useSelector} from 'react-redux';
 import {addUser, setEmail} from '../../redux/reducers/Auth';
 import {useNavigation} from '@react-navigation/native';
+import DividerWithText from '../Components/Divider';
 
 const EachBoxComponent = ({item, index, loader, setLoader}) => {
   const dispatch = useDispatch();
@@ -41,9 +42,7 @@ const EachBoxComponent = ({item, index, loader, setLoader}) => {
       try {
         let userInformation = await authSystem.googleSignIn();
         dispatch(addUser(userInformation));
-        dispatch(setEmail({email : userInformation.email}))
-
-        
+        dispatch(setEmail({email: userInformation.email}));
       } catch (error) {
         console.error(error);
       } finally {
@@ -54,11 +53,7 @@ const EachBoxComponent = ({item, index, loader, setLoader}) => {
 
   return (
     <Pressable
-      style={[
-        styles.eachBox,
-        {flexDirection: 'row', gap: responsiveWidth(4)},
-        commonStyle.everyCenter,
-      ]}
+      style={[styles.eachBox, {flexDirection: 'row'}, commonStyle.everyCenter, commonStyle.shadowStyle]}
       onPress={() => handleEachPress(index)}>
       {localLoader ? (
         <ActivityIndicator color={'#282828'} size={'small'} />
@@ -69,11 +64,22 @@ const EachBoxComponent = ({item, index, loader, setLoader}) => {
               source={item.path}
               resizeMethod="resize"
               resizeMode="contain"
-              style={{width: '100%'}}
+              style={{width: '70%'}}
             />
           </View>
 
-          <Text style={styles.eachBoxText}>{item.title}</Text>
+          <Text
+            style={[
+              styles.eachBoxText,
+              commonStyle.fontBoldTitle,
+              {
+                fontSize: responsiveFontSize(1.8),
+                width: responsiveWidth(50),
+                paddingLeft: responsiveWidth(2),
+              },
+            ]}>
+            {item.title}
+          </Text>
         </>
       )}
     </Pressable>
@@ -86,45 +92,42 @@ const Login = () => {
   return (
     <View style={[commonStyle.container, commonStyle.everyCenter]}>
       <View style={styles.box}>
-        <Text style={commonStyle.boldTitle}>Welcome to</Text>
-
         <View style={styles.imageContainer}>
           <Image
-            source={require('../../assets/images/logo.png')}
+            source={require('../../assets/images/Welcome.png')}
             style={styles.image}
             resizeMethod="resize"
             resizeMode="contain"
           />
         </View>
 
-        <Text style={[commonStyle.boldTitle, {fontFamily: 'Poppins-Regular'}]}>
+        <Text style={[commonStyle.fontBoldTitle, {textAlign: 'center'}]}>
           Step Closer to Self-Care
         </Text>
 
         <FlatList
           data={logins}
           renderItem={props => (
-            <EachBoxComponent
-              {...props}
-              setLoader={setGlobalLoader} // No longer used, local loader manages itself
-            />
+            <EachBoxComponent {...props} setLoader={setGlobalLoader} />
           )}
           ItemSeparatorComponent={() => (
-            <View style={{marginVertical: responsiveWidth(2)}} />
+            <View style={{marginVertical: responsiveWidth(3)}} />
           )}
-          style={{marginTop: responsiveWidth(16)}}
+          style={{marginTop: responsiveWidth(14), paddingBottom : 10}}
         />
 
-        <MarginVertical size={8} />
+          <DividerWithText/>
+
+        {/* <MarginVertical size={8} /> */}
 
         <Text
           style={[
-            commonStyle.boldTitle,
-            {fontFamily: 'Poppins-Medium', marginTop: responsiveWidth(2)},
+            commonStyle.fontBoldTitle,
+            {textAlign : 'center', color : commonColor.BLACK, fontSize : responsiveFontSize(2), fontWeight : 400},
           ]}>
           Don't have account?{' '}
-          <Text onPress={() => navigate('Signup')} style={{color: '#548235'}}>
-            Sign Up
+          <Text onPress={() => navigate('Signup')} style={{color: commonColor.BLUE, fontWeight : 500}}>
+            SignUp
           </Text>
         </Text>
       </View>
@@ -144,32 +147,27 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     height: responsiveWidth(16),
-    width: responsiveWidth(60),
+    width: responsiveWidth(70),
     // borderWidth : 1,
     resizeMode: 'contain',
     ...commonStyle.everyCenter,
     alignSelf: 'center',
-    marginVertical: responsiveWidth(16),
+    marginBottom: responsiveWidth(14),
   },
   eachBox: {
     borderWidth: commonSize.BORDER_WIDTH,
-    borderColor: commonColor.LIGHT_BORDER,
+    borderColor: commonColor.BLUE,
     borderRadius: commonSize.BORDER_RADIUS,
     flexDirection: 'row',
-    width: responsiveWidth(74),
+    width: responsiveWidth(72),
     alignSelf: 'center',
-    paddingVertical: responsiveWidth(4),
+    paddingVertical: responsiveWidth(2),
+    backgroundColor :"#fff",
+
   },
   eachBoxImage: {
     width: responsiveWidth(8),
     height: responsiveWidth(8),
     ...commonStyle.everyCenter,
-  },
-  eachBoxText: {
-    fontFamily: 'Poppins-Medium',
-    fontSize: responsiveFontSize(2.3),
-    color: commonColor.BLACK,
-    // borderWidth : 1,
-    width: responsiveWidth(54),
   },
 });

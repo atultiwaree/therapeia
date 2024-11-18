@@ -5,16 +5,17 @@ import {
 } from 'react-native-responsive-dimensions';
 
 export const commonColor = {
-  MAIN: '#F1EFE7',
+  MAIN: '#f4f4f4',
   BLACK: '#282828',
-  LIGHT_BORDER: '#AFABAB',
+  LIGHT_BORDER: '#fff',
   BACKGROUND_GREY: '#e7e9f1',
-  WHITE : "#fff"
+  WHITE : "#fff",
+  BLUE : "#0b3954"
 };
 
 export const commonSize = {
-  BORDER_WIDTH: responsiveWidth(0.8),
-  BORDER_RADIUS: responsiveWidth(2),
+  BORDER_WIDTH: responsiveWidth(0.5),
+  BORDER_RADIUS: responsiveWidth(3),
   BTN_FONT_SIZE: responsiveFontSize(2.1),
 };
 
@@ -75,6 +76,26 @@ const commonStyle = StyleSheet.create({
     overflow: 'hidden',
     fontSize : responsiveFontSize(2.1)
   },
+
+  fontBoldTitle : {
+    fontFamily : "Rubik",
+    fontSize : responsiveFontSize(2.3),
+    fontWeight : 500,
+    color : commonColor.BLUE,
+  },
+  
+  shadowStyle: {
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.29,
+    shadowRadius: 2.65,
+    
+    elevation: 7,
+  },
+  
 });
 
 export default commonStyle;
