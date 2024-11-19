@@ -1,10 +1,11 @@
 import {
-  Alert,
-  StyleSheet,
+  View,
   Text,
   TextInput,
+  StyleSheet,
   TouchableOpacity,
-  View,
+  Button,
+  Pressable,
 } from 'react-native';
 import React, {useCallback, useState} from 'react';
 import commonStyle, {
@@ -26,6 +27,11 @@ import {showMessage, hideMessage} from 'react-native-flash-message';
 const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const dispatch = useDispatch();
 
@@ -38,7 +44,7 @@ const SignIn = () => {
       });
       return; // Exit function early
     }
-  
+
     // Check if password is provided
     if (!password) {
       showMessage({
@@ -47,7 +53,7 @@ const SignIn = () => {
       });
       return; // Exit function early
     }
-  
+
     // Check if email is valid
     if (!validEmail(email)) {
       showMessage({
@@ -56,11 +62,11 @@ const SignIn = () => {
       });
       return; // Exit function early
     }
-  
+
     try {
       // Attempt to sign in with provided email and password
       const result = await auth().signInWithEmailAndPassword(email, password);
-  
+
       // Dispatch action with user details on successful login
       dispatch(
         addUser({
@@ -68,7 +74,6 @@ const SignIn = () => {
           email: result.user.email,
         }),
       );
-      
 
       console.log(result);
     } catch (error) {
@@ -82,10 +87,12 @@ const SignIn = () => {
   }, [email, password, dispatch]);
 
   return (
-    <View style={commonStyle.container}>
-      <Text style={commonStyle.boldTitle}>Personal Login</Text>
-
+    <View
+      style={[commonStyle.container, {paddingHorizontal: responsiveWidth(10)}]}>
       <MarginVertical size={10} />
+      {/* <Text style={commonStyle.boldTitle}>Personal Login</Text>
+
+      
 
       <TextInput
         style={commonStyle.textInput}
@@ -117,7 +124,71 @@ const SignIn = () => {
           ]}>
           Corporate Login
         </Text>
+      </TouchableOpacity> */}
+
+      <Text
+        style={[
+          commonStyle.fontBoldTitle,
+          {fontSize: responsiveFontSize(3.5)},
+        ]}>
+        Login
+      </Text>
+      <MarginVertical size={2} />
+      <Text
+        style={[
+          commonStyle.fontBoldTitle,
+          {fontWeight: 400, fontSize: responsiveFontSize(1.5)},
+        ]}>
+        Login to Continue...
+      </Text>
+
+      <MarginVertical size={10} />
+
+      <Text style={[commonStyle.label, {fontWeight: 500}]}>Enter Email</Text>
+      <TextInput
+        style={commonStyle.input}
+        placeholder="Enter Email"
+        keyboardType="email-address"
+        value={email}
+        onChangeText={setEmail}
+      />
+
+      <Text style={[commonStyle.label, {fontWeight: 500}]}>Password</Text>
+      <View style={commonStyle.passwordContainer}>
+        <TextInput
+          style={[commonStyle.input, {paddingRight: responsiveWidth(12)}]}
+          placeholder="Enter Password"
+          secureTextEntry={!showPassword}
+          value={password}
+          onChangeText={setPassword}
+          placeholderTextColor={'#B2B2B2'}
+        />
+        <TouchableOpacity
+          style={styles.eyeContainer}
+          onPress={togglePasswordVisibility}>
+          <Text style={commonStyle.eyeIcon}>{showPassword ? '🙈' : '👁️'}</Text>
+        </TouchableOpacity>
+      </View>
+
+      <TouchableOpacity>
+        <Text style={[commonStyle.fontBoldTitle, styles.forgotPassword]}>
+          Forgot Password?
+        </Text>
       </TouchableOpacity>
+
+      <Pressable style={[commonStyle.button]} onPress={() => handleLogin()}>
+        <Text
+          style={[
+            commonStyle.fontBoldTitle,
+
+            {
+              textAlign: 'center',
+              color: '#fff',
+            },
+          ]}>
+          Login
+        </Text>
+      </Pressable>
     </View>
   );
 };
@@ -125,13 +196,16 @@ const SignIn = () => {
 export default SignIn;
 
 const styles = StyleSheet.create({
-  button: {
-    borderColor: commonColor.LIGHT_BORDER,
-    borderWidth: commonSize.BORDER_WIDTH,
-    borderRadius: commonSize.BORDER_RADIUS,
-    width: responsiveWidth(80),
-    alignSelf: 'center',
-    padding: responsiveWidth(3),
-    marginTop: responsiveWidth(16),
+
+  forgotPassword: {
+    textAlign: 'right',
+    marginBottom: 20,
+    fontSize: responsiveFontSize(1.8),
+  },
+  eyeContainer: {
+    position: 'absolute',
+    top: 12,
+    right: 10,
+    bottom: 0,
   },
 });

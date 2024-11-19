@@ -31,7 +31,7 @@ const EachBoxComponent = ({item, index, loader, setLoader}) => {
   const [localLoader, setLocalLoader] = useState(false); // Local loading state
 
   const handleEachPress = useCallback(async index => {
-    if (index === 2) {
+    if (index === 1) {
       navigate('Signin');
     }
 
@@ -41,6 +41,7 @@ const EachBoxComponent = ({item, index, loader, setLoader}) => {
 
       try {
         let userInformation = await authSystem.googleSignIn();
+        
         dispatch(addUser(userInformation));
         dispatch(setEmail({email: userInformation.email}));
       } catch (error) {
@@ -56,7 +57,7 @@ const EachBoxComponent = ({item, index, loader, setLoader}) => {
       style={[styles.eachBox, {flexDirection: 'row'}, commonStyle.everyCenter, commonStyle.shadowStyle]}
       onPress={() => handleEachPress(index)}>
       {localLoader ? (
-        <ActivityIndicator color={'#282828'} size={'small'} />
+        <ActivityIndicator color={'#282828'} size={'large'} />
       ) : (
         <>
           <View style={styles.eachBoxImage}>
@@ -143,7 +144,7 @@ const styles = StyleSheet.create({
   },
   image: {
     // height : responsiveWidth(20),
-    width: '100%',
+    width: '92%',
   },
   imageContainer: {
     height: responsiveWidth(16),
