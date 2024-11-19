@@ -26,10 +26,12 @@ import SelfRating from '../src/Components/SelfRating';
 import Plans from '../src/Plans';
 import Edit from './Edit';
 import OnBoardSecond from '../src/OnBoardingScreens/OnBoardSecond';
+import OnBoardFirst from '../src/OnBoardingScreens/OnBoardFirst';
 const Stack = createNativeStackNavigator();
 
 const StackNavigation = () => {
   const userInfo = useSelector(state => state.auth);
+  const shownOnBoard = useSelector(state => state.onBoard.data.shown);
 
   return (
     <Stack.Navigator
@@ -46,29 +48,47 @@ const StackNavigation = () => {
       }}>
       {!userInfo.profile.loggedIn ? (
         <>
-          <Stack.Screen
-            name="Login"
-            component={Login}
-            options={{headerShown: false}}
-          />
+          {!shownOnBoard ? (
+            <>
+              <Stack.Screen
+                name="OnBoardFirst"
+                component={OnBoardFirst}
+                options={{headerShown: false}}
+              />
 
-          <Stack.Screen
-            name="Signup"
-            component={SignUp}
-            options={{
-              title: '',
-              headerShadowVisible: false,
-            }}
-          />
+              <Stack.Screen
+                name="OnBoardSecond"
+                component={OnBoardSecond}
+                options={{headerShown: false}}
+              />
+            </>
+          ) : (
+            <>
+              <Stack.Screen
+                name="Login"
+                component={Login}
+                options={{headerShown: false}}
+              />
 
-          <Stack.Screen
-            name="Signin"
-            component={SignIn}
-            options={{
-              title: '',
-              headerShadowVisible: false,
-            }}
-          />
+              <Stack.Screen
+                name="Signup"
+                component={SignUp}
+                options={{
+                  title: '',
+                  headerShadowVisible: false,
+                }}
+              />
+
+              <Stack.Screen
+                name="Signin"
+                component={SignIn}
+                options={{
+                  title: '',
+                  headerShadowVisible: false,
+                }}
+              />
+            </>
+          )}
         </>
       ) : (
         <>
@@ -76,7 +96,7 @@ const StackNavigation = () => {
             <>
               <Stack.Screen
                 name="categoryScreen"
-                component={OnBoardSecond}
+                component={CategoryScreen}
                 options={{
                   title: '',
                   headerShadowVisible: false,
@@ -108,9 +128,7 @@ const StackNavigation = () => {
                 options={{
                   title: '',
                   headerShadowVisible: false,
-                  
                 }}
-              
               />
 
               <Stack.Screen
@@ -119,7 +137,7 @@ const StackNavigation = () => {
                 options={{
                   title: '',
                   headerShadowVisible: false,
-                  headerRight : () => <Edit/>
+                  headerRight: () => <Edit />,
                 }}
               />
 

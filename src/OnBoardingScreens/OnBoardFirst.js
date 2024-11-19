@@ -1,10 +1,12 @@
 import {View, Text, StyleSheet, Image, Pressable} from 'react-native';
 import React from 'react';
-import commonStyle from '../../Styles/AppStyles';
+import commonStyle, { MarginVertical } from '../../Styles/AppStyles';
+import { navigate } from '../../Navigation/RootNavigation';
 
 const OnBoardFirst = () => {
   return (
     <View style={commonStyle.container}>
+      <MarginVertical size={20}/>
       <Image
         source={require('../../assets/images/YogaSeHoga.png')}
         style={styles.image}
@@ -29,7 +31,7 @@ const OnBoardFirst = () => {
 
       <Pressable
         style={[commonStyle.button, {width: '80%', alignSelf: 'center'}]}
-        onPress={() => console.log('Next Pressed')}>
+        onPress={() => navigate("OnBoardSecond")}>
         <Text
           style={[
             commonStyle.fontBoldTitle,

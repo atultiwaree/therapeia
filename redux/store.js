@@ -2,9 +2,11 @@ import {configureStore} from '@reduxjs/toolkit';
 import {combineReducers} from '@reduxjs/toolkit';
 
 import authReducer from '../redux/reducers/Auth';
+import onBoardReducer from '../redux/reducers/OnBoard'
 
 const combined_reducer = combineReducers({
   auth: authReducer,
+  onBoard : onBoardReducer,
   [therapeiaApis.reducerPath]: therapeiaApis.reducer,
 });
 
