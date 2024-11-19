@@ -25,6 +25,7 @@ import Question from '../src/dummy/Question';
 import SelfRating from '../src/Components/SelfRating';
 import Plans from '../src/Plans';
 import Edit from './Edit';
+import OnBoardSecond from '../src/OnBoardingScreens/OnBoardSecond';
 const Stack = createNativeStackNavigator();
 
 const StackNavigation = () => {
@@ -75,7 +76,7 @@ const StackNavigation = () => {
             <>
               <Stack.Screen
                 name="categoryScreen"
-                component={CategoryScreen}
+                component={OnBoardSecond}
                 options={{
                   title: '',
                   headerShadowVisible: false,

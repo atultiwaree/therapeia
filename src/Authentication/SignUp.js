@@ -194,7 +194,10 @@ const SignUp = () => {
         cursorColor={commonColor.LIGHT_BORDER}
         onChangeText={t => setEmail(t)}
         placeholderTextColor={'#B2B2B2'}
+        autoCapitalize='none'
       />
+
+      
       <Text style={[commonStyle.label, {fontWeight: 500}]}>Password</Text>
       <View style={commonStyle.passwordContainer}>
         <TextInput

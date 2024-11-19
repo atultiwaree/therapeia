@@ -151,6 +151,7 @@ const SignIn = () => {
         keyboardType="email-address"
         value={email}
         onChangeText={setEmail}
+        autoCapitalize='none'
       />
 
       <Text style={[commonStyle.label, {fontWeight: 500}]}>Password</Text>
