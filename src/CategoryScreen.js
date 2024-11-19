@@ -8,85 +8,58 @@ import {
   View,
 } from 'react-native';
 import React from 'react';
-import commonStyle, {commonColor, commonSize} from '../Styles/AppStyles';
+import commonStyle, {commonColor, commonSize, MarginVertical} from '../Styles/AppStyles';
 import {counsellingCategory} from '../assets/data';
 import {
   responsiveFontSize,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import {navigate} from '../Navigation/RootNavigation';
+import CategoryCard from './Components/CategoryCard';
 
 const CategoryScreen = () => {
-  const handleEachCategory = index => {
-    
-    if (index === 0) {
-      navigate('counselling');
-    }
 
-    if(index === 1) {
-      navigate("plans")
-    }
 
-    if( index === 2 ) {
-      navigate("counselling", { category : "educate" })
-    }
 
-    if( index === 6 ) {
-      navigate("singleAfterCategory", { category : "community" })
-    }
+  // const EachCategoryBox = ({item}) => {
+  //   return (
+  //     <TouchableOpacity
+  //       style={styles.box}
+  //       onPress={() => handleEachCategory(item.id)}>
+  //       <Image
+  //         source={item.path}
+  //         resizeMethod="resize"
+  //         resizeMode="contain"
+  //         style={{
+  //           width: '35%',
+  //           height: responsiveWidth(20),
+  //         }}
+  //       />
 
-    if(index === 4) {
-      navigate("singleAfterCategory", { category : "meditation" })
-    }
-
-    if(index === 7) {
-      navigate("singleAfterCategory", { category : "therapist" })
-    }
-
-  };
-
-  const EachCategoryBox = ({item}) => {
-    return (
-      <TouchableOpacity
-        style={styles.box}
-        onPress={() => handleEachCategory(item.id)}>
-        <Image
-          source={item.path}
-          resizeMethod="resize"
-          resizeMode="contain"
-          style={{
-            width: '35%',
-            height: responsiveWidth(20),
-          }}
-        />
-
-        <Text
-          style={[
-            commonStyle.boldTitle,
-            {
-              fontFamily: 'Poppins-SemiBold',
-              fontSize: responsiveFontSize(1.8),
-              marginTop: responsiveWidth(2),
-            },
-          ]}>
-          {item.title}
-        </Text>
-      </TouchableOpacity>
-    );
-  };
+  //       <Text
+  //         style={[
+  //           commonStyle.boldTitle,
+  //           {
+  //             fontFamily: 'Poppins-SemiBold',
+  //             fontSize: responsiveFontSize(1.8),
+  //             marginTop: responsiveWidth(2),
+  //           },
+  //         ]}>
+  //         {item.title}
+  //       </Text>
+  //     </TouchableOpacity>
+  //   );
+  // };
 
   return (
     <View style={commonStyle.container}>
       <FlatList
         data={counsellingCategory}
-        renderItem={({item, index}) => <EachCategoryBox item={item} />}
-        numColumns={2}
-        columnWrapperStyle={{
-          justifyContent: 'space-around',
-        }}
+        renderItem={({item, index}) => <CategoryCard item={item} index = {index}/>}
         style={{
           marginTop: responsiveWidth(10),
         }}
+        ItemSeparatorComponent={() => <MarginVertical size={10}/>}
         keyExtractor={item => item.id}
       />
     </View>

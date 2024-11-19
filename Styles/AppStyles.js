@@ -11,6 +11,8 @@ export const commonColor = {
   BACKGROUND_GREY: '#e7e9f1',
   WHITE: '#fff',
   BLUE: '#0b3954',
+  CATEGORY_BTN_TXT: '#cce4fb',
+  CATEGORY_TITLE : '#E5E5E5'
 };
 
 export const commonSize = {
@@ -118,6 +120,30 @@ const commonStyle = StyleSheet.create({
   eyeIcon: {
     fontSize: 24,
     color: '#2c5364',
+  },
+
+  categoryButton: {
+    padding: responsiveWidth(2),
+    backgroundColor: commonColor.BLUE,
+    borderRadius: responsiveWidth(3),
+    marginVertical: responsiveWidth(4),
+    textAlign: 'center',
+    overflow: 'hidden',
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 4},
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    elevation: 5,
+    borderWidth: 2,
+    borderColor: "#7596b0",
+  },
+
+  categoryButtonText: {
+    color: commonColor.CATEGORY_BTN_TXT,
+    fontFamily: 'Rubik',
+    fontSize: responsiveFontSize(2),
+    fontWeight: 500,
+    textAlign: 'center',
   },
 });
 

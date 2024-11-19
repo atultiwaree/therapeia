@@ -14,44 +14,47 @@ export const logins = [
 export const counsellingCategory = [
   {
     title: 'Counselling',
+    titles : "Daily Dose of Life",
     id: 0,
-    path: require('../assets/icons/counselling.png'),
+    path: require('../assets/icons/categoryImages/first.png'),
   },
   {
     title: 'My Plans',
+    titles : 'Resources',
     id: 1,
-    path: require('../assets/icons/plan.png'),
+    path: require('../assets/icons/categoryImages/second.png'),
   },
   {
     title: 'Educate',
+    titles : 'Activity',
     id: 2,
-    path: require('../assets/icons/student.png'),
+    path: require('../assets/icons/categoryImages/third.png'),
   },
   {
     title: 'Activity',
+    titles : 'Therapist',
     id: 3,
-    path: require('../assets/icons/activity.png'),
+    path: require('../assets/icons/categoryImages/fourth.png'),
   },
   {
     title: 'Meditation',
+    titles : 'Daily Activities',
     id: 4,
-    path: require('../assets/icons/breath.png'),
+    path: require('../assets/icons/categoryImages/fifth.png'),
   },
   {
     title: 'Assessment',
+    titles : 'Daily Meditation',
     id: 5,
-    path: require('../assets/icons/assessment.png'),
+    path: require('../assets/icons/categoryImages/sixth.png'),
   },
   {
     title: 'Community',
+    titles : 'Mental Health',
     id: 6,
-    path: require('../assets/icons/community.png'),
+    path: require('../assets/icons/categoryImages/seventh.png'),
   },
-  {
-    title: 'Therapist',
-    id: 7,
-    path: require('../assets/icons/therapist.png'),
-  },
+
 ];
 
 export const counsellingData = [
