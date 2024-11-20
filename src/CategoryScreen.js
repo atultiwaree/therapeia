@@ -1,20 +1,13 @@
 import {
   FlatList,
-  Image,
-  Pressable,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
   View,
 } from 'react-native';
 import React from 'react';
 import commonStyle, {commonColor, commonSize, MarginVertical} from '../Styles/AppStyles';
 import {counsellingCategory} from '../assets/data';
 import {
-  responsiveFontSize,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import {navigate} from '../Navigation/RootNavigation';
 import CategoryCard from './Components/CategoryCard';
 
 const CategoryScreen = () => {
@@ -61,23 +54,11 @@ const CategoryScreen = () => {
         }}
         ItemSeparatorComponent={() => <MarginVertical size={10}/>}
         keyExtractor={item => item.id}
+        showsVerticalScrollIndicator = {false}
+        contentContainerStyle = {{paddingBottom : responsiveWidth(14)}}
       />
     </View>
   );
 };
 
 export default CategoryScreen;
-
-const styles = StyleSheet.create({
-  box: {
-    height: responsiveWidth(30),
-    width: responsiveWidth(30),
-    padding: responsiveWidth(2),
-    ...commonStyle.everyCenter,
-    backgroundColor: commonColor.BACKGROUND_GREY,
-    margin: responsiveWidth(2),
-    marginVertical: responsiveWidth(6),
-    borderRadius: commonSize.BORDER_RADIUS,
-    borderWidth: 1,
-  },
-});
